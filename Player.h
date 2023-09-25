@@ -23,7 +23,9 @@ class Player {
   void attack(Monster** monster_list, int attack_type);
   void take_attack(Machine* opponent, int strength);
   void level_up();
-  
+  void reset();
+  void draw(RenderWindow * win);
+  ~Player();
 
 };
 
