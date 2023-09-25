@@ -1,12 +1,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Machine.h"
+
 #include <string>
 
 using namespace std;
 class Player {
  private:
-  string userName;
+  string user_name;
   Monster** monster_list;
   int current_monster;
   int attack_type; 
@@ -15,12 +17,13 @@ class Player {
   
   public: 
   Player();
-  Player(string userName);
-  void set_monster(string monsterName);
+  Player(string user_name);
+  void set_monster(string monster_name);
   int get_player_level();
   void attack(Monster** monster_list, int attack_type);
+  void take_attack(Machine* opponent, int strength);
+  void level_up();
   
-
 
 };
 
