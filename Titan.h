@@ -1,12 +1,12 @@
-#ifndef SERBINE_H
-#define SERBINE_H
+#ifndef TITAN_H
+#define TITAN_H
 
 #include "Monster.h"
 
-class Serbine: public Monster{
+class Titan: public Monster{
 private:
 public:
-Serbine();
+Titan();
 int attack(int attack_type, string opponent_type);
 };
 
