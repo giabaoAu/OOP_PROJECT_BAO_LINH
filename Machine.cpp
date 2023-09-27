@@ -4,12 +4,17 @@ Machine::Machine() {}
 
 int Machine::get_level() { return 0; }
 
-int Machine::get_monster_type() { return monster_type; }
+string Machine::get_monster_type() { return monster_type; }
 
-Monster * get_monster(){return *(machine_monster)}
+Monster * Machine::get_monster(){return *machine_monster;}
 
 void Machine::update_level() {}
 
 void Machine::set_monster(int level) {}
+
+void Machine::take_attack(int strength) {
+    int new_health = (**machine_monster).get_health() - strength;
+    (**machine_monster).set_health(new_health);
+}
 
 Machine::~Machine() {}

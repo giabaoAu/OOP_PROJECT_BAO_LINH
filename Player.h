@@ -26,7 +26,7 @@ class Player {
   void take_attack(int strength);
   void level_up();
   void reset();
-  void draw(RenderWindow * win);
+  //void draw(RenderWindow * win);
   ~Player();
   
 };
