@@ -2,18 +2,33 @@
 #define MONSTER_H
 #include <string>
 #include "Player.h"
+#include <cmath>
 using namespace std;
 class Monster {
   protected:
   int health;
   int strength;
-  int monster_level;
+  //int monster_level;
+  int critical_attack; 
+
   public:
-  virtual void set_strength(int new_strength);
-  virtual void set_health(int new_health);
+  //constructor for player monster 
+  Monster(int health, int strength, int critical_attack);
+  //constructor for machine monster
+  Monster(int health, int strength);
+
+  void set_strength(int new_strength);
+  void set_health(int new_health);
+  void set_critical_attack(int new_critical_attack);
+
   int get_strength();
   int get_health();
-  void reFill();
+  int get_critical_attack();
+  //int get_monster_level();
+
+  virtual void reset();
+  virtual void reFill();
   virtual int attack(int attack_type, string opponent_type) = 0;  
 };
+
 #endif

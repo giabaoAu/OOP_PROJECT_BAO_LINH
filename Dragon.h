@@ -6,8 +6,14 @@
 class Dragon: public Monster{
 private:
 public:
+//constructor for player monster
 Dragon();
+//constructor for machine monster
+Dragon(int game_level);
+
 int attack(int attack_type, string opponent_type);
+void reFill();
+void reset();
 };
 
 #endif

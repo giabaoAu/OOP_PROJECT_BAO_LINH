@@ -9,16 +9,22 @@ class Machine {
     private: 
     Monster ** machine_monster;
     static string monster_type;
-    int game_level;
+    static int game_level;
     public: 
     Machine();
-    int get_level();
+    static int get_level();
+    //need for attack function in Monster class
     static string get_monster_type();
-    //No need get_monster, may delete later
-    Monster * get_monster();
-    void update_level();
-    void set_monster(int level);
+
+
+    //Monster * get_monster();
+
+    void level_up();
+
+    //random machine's monster (index) drawn before player going to each battle in main.cpp
+    void set_monster(int index);
     void take_attack(int strength);
+    
     ~Machine();
 
 };
