@@ -1,6 +1,5 @@
 #include "Monster.h"
 
-#include "Player.h"
 Monster::Monster(int health, int strenght, int critical_attack)
     : health(health), strength(strength), critical_attack(critical_attack) {}
 

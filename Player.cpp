@@ -1,10 +1,5 @@
 #include "Player.h"
 
-#include "Aqua.h"
-#include "Dragon.h"
-#include "Serbine.h"
-#include "Titan.h"
-
 Player::Player() {}
 
 Player::Player(string user_name) {

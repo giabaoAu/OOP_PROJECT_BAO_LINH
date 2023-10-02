@@ -1,9 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Player.h"
 #include "Machine.h"
-#include "Monster.h"
 #include "abyssGame.h"
 #include <string>
 

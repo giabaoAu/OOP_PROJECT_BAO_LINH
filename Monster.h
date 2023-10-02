@@ -2,6 +2,10 @@
 #define MONSTER_H
 #include <string>
 #include "Player.h"
+#include "Aqua.h"
+#include "Dragon.h"
+#include "Serbine.h"
+#include "Titan.h"
 #include <cmath>
 using namespace std;
 class Monster {
