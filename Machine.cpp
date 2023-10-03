@@ -1,5 +1,7 @@
 #include "Machine.h"
 
+string 
+
 Machine::Machine() {
     game_level = 1;
 }
@@ -15,7 +17,7 @@ void Machine::level_up() {
 }
 
 void Machine::set_monster(int index) {
-    delete machine_monster;
+    delete *machine_monster;
     machine_monster = new Monster*;
     switch (index){
     case 0:

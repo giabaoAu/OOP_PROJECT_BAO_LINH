@@ -3,8 +3,8 @@
 Aqua::Aqua() : Monster(160, 25, 40) {}
 
 Aqua::Aqua(int game_level)
-    : Monster(400 + ((Machine::get_level() - 1) * 200),
-              10 + ((Machine::get_level() - 1) * 10)) {}
+    : Monster(400 + ((monster_level - 1) * 200),
+              10 + ((monster_level - 1) * 10)) {}
 
 void Aqua::reFill() {
   set_strength(get_strength() + 25);
@@ -13,9 +13,9 @@ void Aqua::reFill() {
 }
 
 void Aqua::reset() {
-  set_strength(25 + ((Player::get_player_level() - 1) * 25));
-  set_health(160 + ((Player::get_player_level() - 1) * 35));
-  set_critical_attack(40 + ((Player::get_player_level() - 1) * 25));
+  set_strength(25 + ((monster_level - 1) * 25));
+  set_health(160 + ((monster_level - 1) * 35));
+  set_critical_attack(40 + ((monster_level - 1) * 25));
   ;
 }
 
@@ -31,10 +31,10 @@ int Aqua::attack(int attack_type, string opponent_type) {
     case 2:
       if (opponent_type == "fire") {
         return strength * 3;
-        health -= round((0.015 * Player::get_player_level()) * health);
+        health -= round((0.015 * monster_level) * health);
       } else {
         return strength * 2;
-        health -= round((0.015 * Player::get_player_level()) * health);
+        health -= round((0.015 * monster_level) * health);
       }
       break;
   }

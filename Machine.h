@@ -2,6 +2,10 @@
 #define MACHINE_H
 
 #include "Monster.h"
+#include "Aqua.h"
+#include "Dragon.h"
+#include "Serbine.h"
+#include "Titan.h"
 #include <string>
 
 using namespace std;

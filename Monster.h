@@ -1,18 +1,13 @@
 #ifndef MONSTER_H
 #define MONSTER_H
 #include <string>
-#include "Player.h"
-#include "Aqua.h"
-#include "Dragon.h"
-#include "Serbine.h"
-#include "Titan.h"
 #include <cmath>
 using namespace std;
 class Monster {
   protected:
   int health;
   int strength;
-  //int monster_level;
+  int monster_level;
   int critical_attack; 
 
   public:
@@ -28,7 +23,7 @@ class Monster {
   int get_strength();
   int get_health();
   int get_critical_attack();
-  //int get_monster_level();
+  int get_monster_level();
 
   virtual void reset();
   virtual void reFill();

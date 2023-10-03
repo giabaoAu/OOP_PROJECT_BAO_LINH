@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include "Machine.h"
-#include "abyssGame.h"
+#include "Monster.h"
 #include <string>
 
 using namespace std;
@@ -13,7 +13,7 @@ class Player {
   int current_monster;
   int attack_type; 
   int coins;
-  static int player_level;
+  int player_level;
   
   public: 
   Player();
@@ -21,7 +21,7 @@ class Player {
   
   void set_monster(string monster_name);
   int get_current_monster();
-  static int get_player_level();
+  int get_player_level();
   
   void attack(Monster** monster_list, Machine* opponent, int attack_type);
   void take_attack(int strength);
