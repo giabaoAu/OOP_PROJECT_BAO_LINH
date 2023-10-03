@@ -17,7 +17,7 @@ class abyssGame{
     public:
     abyssGame();
     void new_game();
-    void goBattle();
+    void go_battle();
     void load_game();
     void save_game();
 

@@ -5,23 +5,23 @@ abyssGame::abyssGame() {}
 void abyssGame::new_game() {
     cout<<"Creating a new game ............." <<endl;
     sleep(1);
-    cout<<"Create game player ............" <<endl;
+    cout<<"Creating your character ............" <<endl;
     sleep(1);
     string player_name;
-    cout<<"Please enter an user name (no longer than 20 characters)"<<endl;
+    cout<<"Enter your character name (no longer than 20 characters)"<<endl;
     while(true){
         cin>>player_name;
         if(player_name.length() < 21){
             break;
         }
-        cout<<"Invalid user name. Please enter no more than 20 characters";
+        cout<<"Invalid user name! Please enter no more than 20 characters";
     }
     game_player = new Player(player_name);
-    cout<<"Player created" <<endl;
+    cout<<"A tarnished has risen up from the ashes ..." <<endl;
     sleep(1);
-    cout<<"Welcome to The Abyss Game "<<player_name<<" !"<<endl;
+    cout<<"Welcome to The Abyss, "<<player_name<<"!"<<endl;
     sleep(1);
-    cout<<"Creating monster............."<<endl;
+    cout<<"Thy monster are being called............."<<endl;
     sleep(1);
     game_machine = new Machine();
     srand(time(0));
@@ -31,7 +31,7 @@ void abyssGame::new_game() {
     cout<<"Begin tutorial"<<endl;
 }
 
-void abyssGame::goBattle() {
+void abyssGame::go_battle() {
     cout<<"The machine monster type is: "<<Machine::monster_type<<endl;
     cout<<"Choose your monster type wisely! Enter the name of the monster: ";
     string player_monster_type;
