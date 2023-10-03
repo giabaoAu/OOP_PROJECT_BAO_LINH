@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "Machine.h"
 #include "Monster.h"
-
+#include <time.h>
 #include <string>
 #include <iostream>
 #include <unistd.h>
@@ -17,6 +17,7 @@ class abyssGame{
     public:
     abyssGame();
     void new_game();
+    void goBattle();
     void load_game();
     void save_game();
 

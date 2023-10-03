@@ -11,15 +11,19 @@ int main() {
   int option;
   while (true) {
     cin >> option;
-    if (option == 1 || option == 2) { //error here infinite loop
-      break;
-    } else {
+    if (cin.fail()) {
       cout << "Please enter number 1 or 2" << endl;
+      cin.clear();
+      cin.ignore();
+    } else if (option == 1 || option == 2) { 
+      break;
     }
   }
   abyssGame game;
   if (option == 1) {
     game.new_game();
   }
+
+  
   return 0;
 }

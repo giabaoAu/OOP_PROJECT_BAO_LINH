@@ -24,9 +24,33 @@ void abyssGame::new_game() {
     cout<<"Creating monster............."<<endl;
     sleep(1);
     game_machine = new Machine();
-    game_machine->set_monster(Machine::game_level); //result in seg fault - solved
+    srand(time(0));
+    int index = 0 + (rand() % 4);
+    game_machine->set_monster(index); //result in seg fault - solved
     cout<<"Level 1 monster created!"<<endl;
     cout<<"Begin tutorial"<<endl;
+}
+
+void abyssGame::goBattle() {
+    cout<<"The machine monster type is: "<<Machine::monster_type<<endl;
+    cout<<"Choose your monster type wisely! Enter the name of the monster: ";
+    string player_monster_type;
+    while (true){
+    cin>>player_monster_type;
+    bool check;
+    check = game_player->set_monster(player_monster_type);
+    if (check){
+        break;
+    }
+    }
+    cout<<"ALL SET. GAME START IN ........ "<<endl;
+    cout<<"3"<<endl;
+    cout<<"2"<<endl;
+    cout<<"1"<<endl;
+    cout<<"Player go first. Choose your attack type: ";
+    int attack_type;
+    cin >> attack_type;
+    game_player->attack(game_machine,attack_type);
 }
 
 void abyssGame::load_game() {}

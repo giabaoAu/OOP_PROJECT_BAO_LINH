@@ -11,15 +11,22 @@ Player::Player(string user_name) {
   monster_list[3] = new Serbine();
 }
 
-void Player::set_monster(string monster_name) {
-  if (monster_name == "Dragon") {
+bool Player::set_monster(string monster_name) {
+  if (monster_name == "Dragon" || monster_name == "dragon") {
     this->current_monster = 0;
-  } else if (monster_name == "Titan") {
+    return 1;
+  } else if (monster_name == "Titan" || monster_name == "titan") {
     this->current_monster = 1;
-  } else if (monster_name == "Aqua") {
+    return 1;
+  } else if (monster_name == "Aqua" || monster_name == "aqua") {
     this->current_monster == 2;
-  } else if (monster_name == "Serbine") {
+    return 1;
+  } else if (monster_name == "Serbine" || monster_name == "serbine") {
     this->current_monster = 3;
+    return 1;
+  } else{
+    cout<<"Please check your spelling"<<endl;
+    return 0;
   }
 }
 
@@ -27,7 +34,7 @@ int Player::get_current_monster() { return current_monster; }
 
 int Player::get_player_level() { return player_level; }
 
-void Player::attack(Monster** monster_list, Machine* opponent, int attack_type) {
+void Player::attack(Machine* opponent, int attack_type) {
   int strength = monster_list[current_monster]->attack(attack_type, Machine::monster_type);
   opponent->take_attack(strength);
 }

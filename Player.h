@@ -4,6 +4,7 @@
 #include "Machine.h"
 #include "Monster.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 class Player {
@@ -19,11 +20,11 @@ class Player {
   Player();
   Player(string user_name);
   
-  void set_monster(string monster_name);
+  bool set_monster(string monster_name);
   int get_current_monster();
   int get_player_level();
   
-  void attack(Monster** monster_list, Machine* opponent, int attack_type);
+  void attack(Machine* opponent, int attack_type);
   void take_attack(int strength);
   void level_up();
   void reset();
