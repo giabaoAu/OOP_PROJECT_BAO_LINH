@@ -28,7 +28,7 @@ int Player::get_current_monster() { return current_monster; }
 int Player::get_player_level() { return player_level; }
 
 void Player::attack(Monster** monster_list, Machine* opponent, int attack_type) {
-  int strength = monster_list[current_monster]->attack(attack_type, Machine::get_monster_type());
+  int strength = monster_list[current_monster]->attack(attack_type, Machine::monster_type);
   opponent->take_attack(strength);
 }
 
@@ -55,9 +55,9 @@ void Player::reset() {
 
 void Player::reward(bool win) {
   if(win){
-    Machine::get_level() * 60 + 100;
+    Machine::game_level * 60 + 100;
   }else{
-    Machine::get_level() * 30 + 30;
+    Machine::game_level * 30 + 30;
   }
 }
 

@@ -23,6 +23,8 @@ int Dragon::attack(int attack_type, string opponent_type) {
         health -= round((0.015 * monster_level) * health);
       }
       break;
+    default:
+      return strength;
   }
 }
 
