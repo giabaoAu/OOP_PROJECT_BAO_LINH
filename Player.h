@@ -23,6 +23,7 @@ class Player {
   bool set_monster(string monster_name);
   int get_current_monster();
   int get_player_level();
+  Monster ** get_monster_list();
   
   void attack(Machine* opponent, int attack_type);
   void take_attack(int strength);

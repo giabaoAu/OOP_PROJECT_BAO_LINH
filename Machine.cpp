@@ -6,7 +6,7 @@ Machine::Machine() { game_level = 1; }
 
 // string Machine::get_monster_type() { return monster_type; }
 
-// Monster * Machine::get_monster(){return *machine_monster;}
+Monster * Machine::get_monster(){return *machine_monster;}
 
 void Machine::level_up() { game_level++; }
 

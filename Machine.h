@@ -22,10 +22,9 @@ class Machine {
   static string monster_type;
   static int game_level;
 
-  // Monster * get_monster();
+  Monster * get_monster();
 
   void level_up();
-
   // random machine's monster (index) drawn before player going to each battle
   // in main.cpp
   void set_monster(int index);

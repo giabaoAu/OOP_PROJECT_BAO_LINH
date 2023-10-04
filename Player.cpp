@@ -34,13 +34,15 @@ int Player::get_current_monster() { return current_monster; }
 
 int Player::get_player_level() { return player_level; }
 
+Monster** Player::get_monster_list() { return monster_list; }
+
 void Player::attack(Machine* opponent, int attack_type) {
   int strength = monster_list[current_monster]->attack(attack_type, Machine::monster_type);
   opponent->take_attack(strength);
 }
 
 void Player::take_attack(int strength) {
-  int new_health = monster_list[current_monster]->get_health();
+  int new_health = monster_list[current_monster]->get_health() - strength;
   monster_list[current_monster]->set_health(new_health);
 }
 

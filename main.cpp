@@ -11,7 +11,7 @@ int main() {
   int option;
   while (true) {
     cin >> option;
-    if (cin.fail()) {
+    if (cin.fail() || (option != 1 && option !=2)) {
       cout << "Please enter number 1 or 2" << endl;
       cin.clear();
       cin.ignore();
@@ -22,6 +22,9 @@ int main() {
   abyssGame game;
   if (option == 1) {
     game.new_game();
+  }
+  while (true){
+    
   }
 
   
