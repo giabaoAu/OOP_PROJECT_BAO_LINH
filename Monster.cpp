@@ -1,6 +1,6 @@
 #include "Monster.h"
 
-Monster::Monster(int health, int strenght, int critical_attack)
+Monster::Monster(int health, int strength, int critical_attack)
     : health(health), strength(strength), critical_attack(critical_attack) {}
 
 Monster::Monster(int health, int strength): health(health), strength(strength) {}
@@ -34,4 +34,4 @@ void Monster::reFill() {
   set_critical_attack(get_critical_attack() + 10);
 }
 
-int Monster::attack(int attack_type, string opponent_type) { return 0; }
+//int Monster::attack(int attack_type, string opponent_type) { return 0; }

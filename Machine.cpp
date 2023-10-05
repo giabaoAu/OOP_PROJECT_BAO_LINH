@@ -10,6 +10,8 @@ Monster * Machine::get_monster(){return *machine_monster;}
 
 void Machine::level_up() { game_level++; }
 
+int Machine::get_strength() { return (*machine_monster)->get_strength(); }
+
 void Machine::set_monster(int index) {
   if (game_level != 1) {
     delete *machine_monster;

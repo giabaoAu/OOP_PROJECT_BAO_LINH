@@ -24,7 +24,7 @@ void abyssGame::new_game() {
   cout << "Thy monster are being called............." << endl;
   sleep(1);
   game_machine = new Machine();
-  srand(time(0));
+  srand(time(NULL)); //chua random
   int index = 0 + (rand() % 4);
   game_machine->set_monster(index);  // result in seg fault - solved
   cout << "Level 1 monster created!" << endl;
@@ -47,26 +47,54 @@ void abyssGame::go_battle() {
   cout << "3" << endl;
   cout << "2" << endl;
   cout << "1" << endl;
-  cout << "Player go first. Choose your attack type: ";
-  cout << "1. Normal attack" << endl;
-  cout << "2. Critical attack" << endl;
-  int attack_type;
   while (true) {
-    cin >> attack_type;
-    if (cin.fail() || (attack_type != 1 && attack_type != 2)) {
-      cout << "Please enter number 1 or 2" << endl;
-      cin.clear();
-      cin.ignore();
-    } else if (attack_type == 1 || attack_type == 2) {
+    cout << "Player turn. Choose your attack type: "<<endl;
+    cout << "1. Normal attack" << endl;
+    cout << "2. Critical attack" << endl;
+    int attack_type;
+    while (true) {
+      cin >> attack_type;
+      if (cin.fail() || (attack_type != 1 && attack_type != 2)) {
+        cout << "Please enter number 1 or 2." << endl;
+        cin.clear();
+        cin.ignore();
+      } else if (attack_type == 1 || attack_type == 2) {
+        break;
+      }
+    }
+    game_player->attack(game_machine, attack_type);
+    if (attack_type == 1) {
+      cout << "Your attack damage: "
+           << game_player
+                  ->get_monster_list()[game_player->get_current_monster()]
+                  ->attack(attack_type, Machine::monster_type)
+           << ". Machine remained health: "
+           << game_machine->get_monster()->get_health() << endl;
+    } else if (attack_type == 2) {
+      cout << "Your attack damage: "
+           << game_player
+                  ->get_monster_list()[game_player->get_current_monster()]
+                  ->attack(attack_type, Machine::monster_type)
+           << ". Machine remained health: "
+           << game_machine->get_monster()->get_health() << endl;
+    }
+    if (game_machine->get_monster()->get_health() <= 0) {
+      cout << "Machine lose" << endl;
+      break;
+    }
+    cout << "Machine turn" << endl;
+    game_player->take_attack(game_machine->get_strength());
+    cout << "You take " << game_machine->get_strength()
+         << " damage. Remained health: "
+         << game_player->get_monster_list()[game_player->get_current_monster()]
+                ->get_health()<<endl;
+    if (game_player->get_monster_list()[game_player->get_current_monster()]
+            ->get_health() <= 0) {
+      cout << "Player lose" << endl;
       break;
     }
   }
-  game_player->attack(game_machine, attack_type);
-  cout<<"Machine turn"<<endl;
-  game_player->take_attack(game_machine->get_monster()->get_strength());
-  cout<<"You take "<<game_machine->get_monster()->get_strength()<<"damage. Remained health: ";
 }
-
 void abyssGame::load_game() {}
 
 void abyssGame::save_game() {}

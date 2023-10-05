@@ -3,24 +3,24 @@
 Titan::Titan() : Monster(250, 10, 25) {}
 
 Titan::Titan(int game_level)
-    : Monster(400 + ((monster_level - 1) * 200),
-              10 + ((monster_level - 1) * 10)) {}
+    : Monster(400 + ((game_level - 1) * 200),
+              10 + ((game_level - 1) * 10)) {}
 
 int Titan::attack(int attack_type, string opponent_type) {
   switch (attack_type) {
     case 1:
-      if (opponent_type == "aqua") {
-        return strength * 1.5;
+      if (opponent_type == "Aqua") {
+        return (strength * 1.5);
       } else {
         return strength;
       }
       break;
     case 2:
-      if (opponent_type == "aqua") {
-        return strength * 3;
+      if (opponent_type == "Aqua") {
+        return (strength * 3);
         health -= round((0.015 * monster_level) * health);
       } else {
-        return strength * 2;
+        return (strength * 2);
         health -= round((0.015 * monster_level) * health);
       }
       break;

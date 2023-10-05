@@ -3,8 +3,8 @@
 Serbine::Serbine() : Monster(180, 20, 35) {}
 
 Serbine::Serbine(int game_level)
-    : Monster(400 + ((monster_level - 1) * 200),
-              10 + ((monster_level - 1) * 10)) {}
+    : Monster(400 + ((game_level - 1) * 200),
+              10 + ((game_level - 1) * 10)) {}
 
 void Serbine::reFill() {
   set_strength(get_strength() + 20);
@@ -22,7 +22,7 @@ void Serbine::reset() {
 int Serbine::attack(int attack_type, string opponent_type) {
   switch (attack_type) {
     case 1:
-      if (opponent_type == "earth") {
+      if (opponent_type == "Titan") {
         return strength * 1.5;
       } else {
         return strength;
@@ -30,7 +30,7 @@ int Serbine::attack(int attack_type, string opponent_type) {
       break;
     case 2:  // cout terminal telling player how much health they're gonna
              // lose and confirm if they accept.
-      if (opponent_type == "earth") {
+      if (opponent_type == "Titan") {
         return strength * 3;
         health -= round((0.015 * monster_level) * health);
       } else {

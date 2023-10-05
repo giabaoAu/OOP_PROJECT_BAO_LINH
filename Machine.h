@@ -27,6 +27,7 @@ class Machine {
   void level_up();
   // random machine's monster (index) drawn before player going to each battle
   // in main.cpp
+  int get_strength();
   void set_monster(int index);
   void take_attack(int strength);
 

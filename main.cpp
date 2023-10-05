@@ -22,9 +22,7 @@ int main() {
   abyssGame game;
   if (option == 1) {
     game.new_game();
-  }
-  while (true){
-    
+    game.go_battle();
   }
 
   

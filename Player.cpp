@@ -38,6 +38,7 @@ Monster** Player::get_monster_list() { return monster_list; }
 
 void Player::attack(Machine* opponent, int attack_type) {
   int strength = monster_list[current_monster]->attack(attack_type, Machine::monster_type);
+  cout<<"strength is: "<<strength<<endl;
   opponent->take_attack(strength);
 }
 
