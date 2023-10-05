@@ -2,10 +2,12 @@
 
 Player::Player() {
   player_level = 1;
+  coins = 0;
 }
 
 Player::Player(string user_name) {
   player_level = 1;
+  coins = 0;
   this->user_name = user_name;
   monster_list = new Monster*[4];
   monster_list[0] = new Dragon();
@@ -36,6 +38,10 @@ bool Player::set_monster(string monster_name) {
 int Player::get_current_monster() { return current_monster; }
 
 int Player::get_player_level() { return player_level; }
+
+int Player::get_coins() { return coins; }
+
+void Player::set_coins(int new_coins) {coins = new_coins;}
 
 Monster** Player::get_monster_list() { return monster_list; }
 

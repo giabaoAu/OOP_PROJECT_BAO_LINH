@@ -87,6 +87,10 @@ void abyssGame::go_battle() {
     }
     if (game_machine->get_monster()->get_health() <= 0) {
       cout << "Machine lose" << endl;
+      int new_coins =
+          game_player->get_coins() + (game_machine->game_level * 60 + 100);
+      game_player->set_coins(new_coins);
+      cout << "Your reward: " << new_coins << endl;
       break;
     }
     sleep(1);
@@ -102,6 +106,10 @@ void abyssGame::go_battle() {
     if (game_player->get_monster_list()[game_player->get_current_monster()]
             ->get_health() <= 0) {
       cout << "Player lose" << endl;
+      int new_coins =
+          game_player->get_coins() + (game_machine->game_level * 30 + 30);
+      game_player->set_coins(new_coins);
+      cout << "Your reward: " << new_coins << endl;
       break;
     }
   }
