@@ -31,6 +31,7 @@ void Dragon::reFill() {
   set_strength(get_strength() + 15);
   set_health(get_health() + 45);
   set_critical_attack(get_critical_attack() + 15);
+  monster_level++;
 }
 
 void Dragon::reset() {

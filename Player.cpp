@@ -29,8 +29,8 @@ bool Player::set_monster(string monster_name) {
   } else if (monster_name == "Serbine" || monster_name == "serbine") {
     this->current_monster = 3;
     return 1;
-  } else{
-    cout<<"Please check your spelling"<<endl;
+  } else {
+    cout << "Please check your spelling" << endl;
     return 0;
   }
 }
@@ -41,12 +41,13 @@ int Player::get_player_level() { return player_level; }
 
 int Player::get_coins() { return coins; }
 
-void Player::set_coins(int new_coins) {coins = new_coins;}
+void Player::set_coins(int new_coins) { coins = new_coins; }
 
 Monster** Player::get_monster_list() { return monster_list; }
 
 int Player::attack(Machine* opponent, int attack_type) {
-  int strength = monster_list[current_monster]->attack(attack_type, Machine::monster_type);
+  int strength =
+      monster_list[current_monster]->attack(attack_type, Machine::monster_type);
   opponent->take_attack(strength);
   return strength;
 }
@@ -57,29 +58,29 @@ void Player::take_attack(int strength) {
 }
 
 void Player::level_up() {
-  if (coins >= (player_level + 1) * 100 - 50) {
-    coins -= (player_level + 1) * 100 - 50;
-    player_level++;
-    for (int i = 0; i < 4; i++) {
-      monster_list[i]->reFill();
-    }
+  // if (coins >= (player_level + 1) * 100 - 50) {
+  //   coins -= (player_level + 1) * 100 - 50;
+  player_level++;
+  for (int i = 0; i < 4; i++) {
+    monster_list[i]->reFill();
   }
 }
 
-// After each round, the player monsters stat reset to original level (level before the battle)
+// After each round, the player monsters stat reset to original level (level
+// before the battle)
 void Player::reset() {
   monster_list[get_current_monster()]->reFill();
   monster_list[get_current_monster()]->reFill();
 }
 
 void Player::reward(bool win) {
-  if(win){
+  if (win) {
     Machine::game_level * 60 + 100;
-  }else{
+  } else {
     Machine::game_level * 30 + 30;
   }
 }
 
-//void Player::draw(RenderWindow* win) {}
+// void Player::draw(RenderWindow* win) {}
 
 Player::~Player() {}

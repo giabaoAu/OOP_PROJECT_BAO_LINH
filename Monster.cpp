@@ -34,6 +34,7 @@ void Monster::reFill() {
   set_strength(get_strength() + 10);
   set_health(get_health() + 10);
   set_critical_attack(get_critical_attack() + 10);
+  monster_level++;
 }
 
 //int Monster::attack(int attack_type, string opponent_type) { return 0; }

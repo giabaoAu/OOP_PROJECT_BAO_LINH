@@ -16,9 +16,11 @@ class abyssGame{
     Machine * game_machine;
     public:
     abyssGame();
+    int game_menu();
     void new_game();
     void go_battle();
     void load_game();
+    void level_up();
     void save_game();
 
 };

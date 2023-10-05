@@ -35,6 +35,7 @@ void Titan::reFill() {
   set_strength(get_strength() + 10);
   set_health(get_health() + 60);
   set_critical_attack(get_critical_attack() + 10);
+  monster_level++;
 }
 
 void Titan::reset() {

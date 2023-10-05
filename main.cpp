@@ -23,6 +23,14 @@ int main() {
   if (option == 1) {
     game.new_game();
     game.go_battle();
+    while (true){
+      int option = game.game_menu();
+      if (option == 1){
+        game.go_battle();
+      }else if(option == 2){
+        game.level_up();
+      }
+    }
   }
 
   

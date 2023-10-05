@@ -10,6 +10,7 @@ void Aqua::reFill() {
   set_strength(get_strength() + 25);
   set_health(get_health() + 35);
   set_critical_attack(get_critical_attack() + 25);
+  monster_level++;
 }
 
 void Aqua::reset() {

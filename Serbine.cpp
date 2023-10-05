@@ -9,6 +9,7 @@ void Serbine::reFill() {
   set_strength(get_strength() + 20);
   set_health(get_health() + 55);
   set_critical_attack(get_critical_attack() + 20);
+  monster_level++;
 }
 
 void Serbine::reset() {
