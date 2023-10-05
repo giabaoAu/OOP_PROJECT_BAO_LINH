@@ -1,5 +1,5 @@
 #include "Titan.h"
-
+#include <iostream>
 Titan::Titan() : Monster(250, 10, 25) {}
 
 Titan::Titan(int game_level)
@@ -17,11 +17,13 @@ int Titan::attack(int attack_type, string opponent_type) {
       break;
     case 2:
       if (opponent_type == "Aqua") {
+        health = health - ((0.015 * monster_level) * health);
+        //std::cout<<"Remained health is: "<<health<<std::endl;
         return (strength * 3);
-        health -= round((0.015 * monster_level) * health);
       } else {
+        health = health - ((0.015 * monster_level) * health);
+        //std::cout<<"Remained health is: "<<health<<std::endl;
         return (strength * 2);
-        health -= round((0.015 * monster_level) * health);
       }
       break;
     default:

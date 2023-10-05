@@ -1,7 +1,9 @@
 #include "Monster.h"
 
 Monster::Monster(int health, int strength, int critical_attack)
-    : health(health), strength(strength), critical_attack(critical_attack) {}
+    : health(health), strength(strength), critical_attack(critical_attack) {
+      monster_level = 1;
+    }
 
 Monster::Monster(int health, int strength): health(health), strength(strength) {}
 

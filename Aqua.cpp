@@ -30,11 +30,11 @@ int Aqua::attack(int attack_type, string opponent_type) {
       break;
     case 2:
       if (opponent_type == "Dragon") {
+        health = health - ((0.015 * monster_level) * health);
         return strength * 3;
-        health -= round((0.015 * monster_level) * health);
       } else {
+        health = health - ((0.015 * monster_level) * health);
         return strength * 2;
-        health -= round((0.015 * monster_level) * health);
       }
       break;
     default:

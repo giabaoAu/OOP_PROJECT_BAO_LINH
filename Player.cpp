@@ -1,8 +1,11 @@
 #include "Player.h"
 
-Player::Player() {}
+Player::Player() {
+  player_level = 1;
+}
 
 Player::Player(string user_name) {
+  player_level = 1;
   this->user_name = user_name;
   monster_list = new Monster*[4];
   monster_list[0] = new Dragon();
@@ -36,10 +39,10 @@ int Player::get_player_level() { return player_level; }
 
 Monster** Player::get_monster_list() { return monster_list; }
 
-void Player::attack(Machine* opponent, int attack_type) {
+int Player::attack(Machine* opponent, int attack_type) {
   int strength = monster_list[current_monster]->attack(attack_type, Machine::monster_type);
-  cout<<"strength is: "<<strength<<endl;
   opponent->take_attack(strength);
+  return strength;
 }
 
 void Player::take_attack(int strength) {

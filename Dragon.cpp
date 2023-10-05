@@ -2,8 +2,7 @@
 Dragon::Dragon() : Monster(210, 15, 30) {}
 
 Dragon::Dragon(int game_level)
-    : Monster(400 + ((game_level - 1) * 200),
-              10 + ((game_level - 1) * 10)) {}
+    : Monster(400 + ((game_level - 1) * 200), 10 + ((game_level - 1) * 10)) {}
 
 int Dragon::attack(int attack_type, string opponent_type) {
   switch (attack_type) {
@@ -16,11 +15,11 @@ int Dragon::attack(int attack_type, string opponent_type) {
       break;
     case 2:
       if (opponent_type == "Serbine") {
+        health = health - ((0.015 * monster_level) * health);
         return strength * 3;
-        health -= round((0.015 * monster_level) * health);
       } else {
+        health = health - ((0.015 * monster_level) * health);
         return strength * 2;
-        health -= round((0.015 * monster_level) * health);
       }
       break;
     default:

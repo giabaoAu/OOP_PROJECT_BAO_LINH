@@ -25,7 +25,7 @@ class Player {
   int get_player_level();
   Monster ** get_monster_list();
   
-  void attack(Machine* opponent, int attack_type);
+  int attack(Machine* opponent, int attack_type);
   void take_attack(int strength);
   void level_up();
   void reset();
