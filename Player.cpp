@@ -41,7 +41,13 @@ int Player::get_player_level() { return player_level; }
 
 int Player::get_coins() { return coins; }
 
+string Player::get_player_name() { return user_name; }
+
 void Player::set_coins(int new_coins) { coins = new_coins; }
+
+void Player::set_player_name(string player_name) {this->user_name = player_level;}
+
+void Player::set_player_level(int player_level) {this->player_level = player_level;}
 
 Monster** Player::get_monster_list() { return monster_list; }
 

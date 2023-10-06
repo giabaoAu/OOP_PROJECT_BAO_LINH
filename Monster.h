@@ -27,6 +27,7 @@ class Monster {
 
   virtual void reset();
   virtual void reFill();
+  virtual void reset_for_load(int player_level);
   virtual int attack(int attack_type, string opponent_type) = 0;  
 };
 

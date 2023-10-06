@@ -24,17 +24,10 @@ int Monster::get_critical_attack() { return critical_attack; }
 int Monster::get_monster_level() { return monster_level; }
 // string Monster::get_monster_type(){return monster_type;}
 
-void Monster::reset() {
-  set_strength(get_strength() - 10);
-  set_health(210 + ((monster_level -1) * 45)); // -1 bc level 1 was not added with 45
-  set_critical_attack(get_critical_attack() + 10);
-}
+void Monster::reset() {return;}
 
-void Monster::reFill() {
-  set_strength(get_strength() + 10);
-  set_health(get_health() + 10);
-  set_critical_attack(get_critical_attack() + 10);
-  monster_level++;
-}
+void Monster::reFill() {return;}
+
+void Monster::reset_for_load(int player_level) {return;}
 
 //int Monster::attack(int attack_type, string opponent_type) { return 0; }

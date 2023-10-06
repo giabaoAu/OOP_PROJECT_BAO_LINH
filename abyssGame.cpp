@@ -1,28 +1,27 @@
 #include "abyssGame.h"
 
+#include <fstream>
+
 abyssGame::abyssGame() {}
 
 int abyssGame::game_menu() {
   cout << "GAME MENU:" << endl;
   cout << "1. Go to battle" << endl;
   cout << "2. Level up" << endl;
-  cout << "Please choose 1 or 2: ";
+  cout << "3. Quit and Save" << endl;
+  cout << "Please choose 1, 2 or 3: ";
   int option;
   while (true) {
     cin >> option;
-    if (cin.fail() || (option != 1 && option != 2)) {
-      cout << "Please enter number 1 or 2." << endl;
+    if (cin.fail() || (option != 1 && option != 2 && option != 3)) {
+      cout << "Please enter number 1, 2 or 3." << endl;
       cin.clear();
       cin.ignore();
-    } else if (option == 1 || option == 2) {
+    } else if (option == 1 || option == 2 || option == 3) {
       break;
     }
   }
-  if (option == 1) {
-    return 1;
-  } else if (option == 2) {
-    return 2;
-  }
+  return option;
 }
 
 void abyssGame::new_game() {
@@ -52,11 +51,14 @@ void abyssGame::new_game() {
 }
 
 void abyssGame::go_battle() {
-  srand(time(NULL));  // 3 test deu ra Aqua
+  srand(time(NULL));  // 3 test deu ra Aqua - FIXED
   int index = 0 + (rand() % 4);
+  if (game_machine->game_level != 1) {
+    delete game_machine->get_monster();
+  }
   game_machine->set_monster(index);
   cout << "The machine monster type is: " << Machine::monster_type
-       << ". Health: " << endl;
+       << ". Health: " << game_machine->get_monster()->get_health() << endl;
   cout << "Choose your monster type wisely! Enter the name of the monster: ";
   string player_monster_type;
   while (true) {
@@ -143,7 +145,6 @@ void abyssGame::go_battle() {
     }
   }
 }
-void abyssGame::load_game() {}
 
 void abyssGame::level_up() {
   cout << "LEVEL UP PAGE:" << endl;
@@ -222,4 +223,66 @@ void abyssGame::level_up() {
   }
 }
 
-void abyssGame::save_game() {}
+void abyssGame::save_game() {
+  ofstream save_file("game_saved.txt");
+
+  if (!save_file.is_open()) {
+    cout << "Error! Unable to open saved file. " << endl;
+    return;
+  }
+
+  // Save player data
+  save_file << game_player->get_coins() << endl;
+  save_file << game_player->get_player_name() << endl;
+  // save player_level so when we load into the game, call reset() function of
+  // each monster based on player's level as player_level = monster_level?
+  save_file << game_player->get_player_level() << endl;
+
+  // For machine
+  save_file << game_machine->game_level;
+  // Close the file
+  save_file.close();
+
+  cout << "Game saved successfully." << endl;
+}
+
+abyssGame abyssGame::load_game() {
+  ifstream load_file("game_saved.txt");
+
+  // Check if the file is open
+  if (!load_file.is_open()) {
+    std::cout << "No saved game found." << std::endl;
+    exit(1);
+  }
+
+  // Load player data
+  string player_name;
+  int coins, player_level;
+
+  abyssGame game;
+
+  load_file >> coins >> player_name >> player_level;
+  game.game_player = new Player(player_name);
+  game.game_player->set_coins(coins);
+  game.game_player->set_player_level(player_level);
+
+  game.game_player->get_monster_list()[0]->reset_for_load(player_level);
+  game.game_player->get_monster_list()[1]->reset_for_load(player_level);
+  game.game_player->get_monster_list()[2]->reset_for_load(player_level);
+  game.game_player->get_monster_list()[3]->reset_for_load(player_level);
+  // game_player->set_monster(current_monster);
+
+  int game_level;
+  load_file >> game_level;
+  // Load machine data
+  game.game_machine = new Machine();
+  game.game_machine->set_game_level(game_level);
+  game.game_machine->set_monster(1); //set cho co de go_battle function delete khong bi seg fault
+
+  // Close the file
+  load_file.close();
+
+  cout << "Game loaded successfully." << endl;
+
+  return game;
+}

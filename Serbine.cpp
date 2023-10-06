@@ -16,7 +16,12 @@ void Serbine::reset() {
   set_strength(20 + ((monster_level - 1) * 20));
   set_health(180 + ((monster_level - 1) * 55));
   set_critical_attack(35 + ((monster_level - 1) * 20));
-  ;
+}
+
+void Serbine::reset_for_load(int player_level) {
+  set_strength(20 + ((player_level - 1) * 20));
+  set_health(180 + ((player_level - 1) * 55));
+  set_critical_attack(35 + ((player_level - 1) * 20));
 }
 
 int Serbine::attack(int attack_type, string opponent_type) {

@@ -39,3 +39,9 @@ void Dragon::reset() {
   set_health(210 + ((monster_level - 1) * 45));
   set_critical_attack(30 + ((monster_level - 1) * 15));
 }
+
+void Dragon::reset_for_load(int player_level) {
+  set_strength(15 + ((player_level - 1) * 15));
+  set_health(210 + ((player_level - 1) * 45));
+  set_critical_attack(30 + ((player_level - 1) * 15));
+}

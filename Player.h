@@ -24,7 +24,10 @@ class Player {
   int get_current_monster();
   int get_player_level();
   int get_coins();
+  string get_player_name();
   void set_coins(int new_coins);
+  void set_player_name(string player_name);
+  void set_player_level(int player_level);
   Monster ** get_monster_list();
   
   int attack(Machine* opponent, int attack_type);

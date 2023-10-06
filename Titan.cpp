@@ -43,3 +43,9 @@ void Titan::reset() {
   set_health(250 + ((monster_level - 1) * 60));
   set_critical_attack(25 + ((monster_level - 1) * 10));
 }
+
+void Titan::reset_for_load(int player_level) {
+  set_strength(15 + ((player_level - 1) * 10));
+  set_health(250 + ((player_level - 1) * 60));
+  set_critical_attack(25 + ((player_level - 1) * 10));
+}

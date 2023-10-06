@@ -20,6 +20,12 @@ void Aqua::reset() {
   ;
 }
 
+void Aqua::reset_for_load(int player_level) {
+  set_strength(25 + ((player_level - 1) * 25));
+  set_health(160 + ((player_level - 1) * 35));
+  set_critical_attack(40 + ((player_level - 1) * 25));
+}
+
 int Aqua::attack(int attack_type, string opponent_type) { 
   switch (attack_type) {
     case 1:
