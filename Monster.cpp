@@ -15,6 +15,8 @@ void Monster::set_critical_attack(int new_critical_attack) {
   critical_attack = new_critical_attack;
 }
 
+void Monster::set_monster_level(int new_level) {monster_level = new_level;}
+
 int Monster::get_strength() { return strength; }
 
 int Monster::get_health() { return health; }
@@ -22,6 +24,7 @@ int Monster::get_health() { return health; }
 int Monster::get_critical_attack() { return critical_attack; }
 
 int Monster::get_monster_level() { return monster_level; }
+string Monster::get_skill_name() { return skill_name; }
 // string Monster::get_monster_type(){return monster_type;}
 
 void Monster::reset() {return;}

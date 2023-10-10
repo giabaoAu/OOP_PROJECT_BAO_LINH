@@ -33,8 +33,7 @@ int Serbine::attack(int attack_type, string opponent_type) {
         return strength;
       }
       break;
-    case 2:  // cout terminal telling player how much health they're gonna
-             // lose and confirm if they accept.
+    case 2:  
       if (opponent_type == "Titan") {
         health = health - ((0.015 * monster_level) * health);
         return strength * 3;

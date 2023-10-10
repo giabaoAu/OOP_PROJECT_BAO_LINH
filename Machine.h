@@ -8,6 +8,10 @@
 #include "Monster.h"
 #include "Serbine.h"
 #include "Titan.h"
+#include "SuperDragon.h"
+#include "SuperAqua.h"
+#include "SuperTitan.h"
+#include "SuperSerbine.h"
 
 using namespace std;
 class Machine {

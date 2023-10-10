@@ -9,6 +9,7 @@ class Monster {
   int strength;
   int monster_level;
   int critical_attack; 
+  string skill_name;
 
   public:
   //constructor for player monster 
@@ -19,11 +20,13 @@ class Monster {
   void set_strength(int new_strength);
   void set_health(int new_health);
   void set_critical_attack(int new_critical_attack);
+  void set_monster_level(int new_level);
 
   int get_strength();
   int get_health();
   int get_critical_attack();
   int get_monster_level();
+  string get_skill_name();
 
   virtual void reset();
   virtual void reFill();

@@ -30,6 +30,7 @@ void abyssGame::new_game() {
   cout << "Creating your character ............" << endl;
   sleep(1);
   string player_name;
+  // error when player name has space
   cout << "Enter your character name (no longer than 20 characters)" << endl;
   while (true) {
     cin >> player_name;
@@ -82,14 +83,26 @@ void abyssGame::go_battle() {
     sleep(1);
     cout << "1. Normal attack" << endl;
     cout << "2. Critical attack" << endl;
+    if (game_player->get_player_level() >= 2) {
+      cout << "3. "
+           << game_player
+                  ->get_monster_list()[game_player->get_current_monster()]
+                  ->get_skill_name()
+           << endl;
+    }
     int attack_type;
     while (true) {
       cin >> attack_type;
-      if (cin.fail() || (attack_type != 1 && attack_type != 2)) {
-        cout << "Please enter number 1 or 2." << endl;
+      if (cin.fail() ||
+          (attack_type != 1 && attack_type != 2 && attack_type != 3)) {
+        if (game_player->get_player_level() < 2) {
+          cout << "Please enter number 1 or 2." << endl;
+        } else if (game_player->get_player_level() > 2) {
+          cout << "Please enter number 1, 2 or 3." << endl;
+        }
         cin.clear();
         cin.ignore();
-      } else if (attack_type == 1 || attack_type == 2) {
+      } else if (attack_type == 1 || attack_type == 2 || attack_type == 3) {
         break;
       }
     }
@@ -110,16 +123,20 @@ void abyssGame::go_battle() {
           << game_player->get_monster_list()[game_player->get_current_monster()]
                  ->get_health()
           << endl;
+    } else if (attack_type == 3) {
+      cout << "Your attack damage: " << strength
+           << ". Machine remained health: "
+           << game_machine->get_monster()->get_health() << endl;
     }
     if (game_machine->get_monster()->get_health() <= 0) {
       cout << "Machine lose" << endl;
       int new_coins =
           game_player->get_coins() + (game_machine->game_level * 60 + 100);
       game_player->set_coins(new_coins);
-      cout << "Your reward: " << new_coins << endl;
+      cout << "Your current coins: " << new_coins << endl;
       game_machine->game_level++;
       game_player->get_monster_list()[game_player->get_current_monster()]
-          ->reFill();
+          ->reset();
       break;
     }
     sleep(1);
@@ -140,13 +157,17 @@ void abyssGame::go_battle() {
       game_player->set_coins(new_coins);
       cout << "Your reward: " << new_coins << endl;
       game_player->get_monster_list()[game_player->get_current_monster()]
-          ->reFill();
+          ->reset();
       break;
     }
   }
 }
 
 void abyssGame::level_up() {
+  // reset everything before showing the stats.
+  for (int i = 0; i < 4; i++) {
+    game_player->get_monster_list()[i]->reset();
+  }
   cout << "LEVEL UP PAGE:" << endl;
   cout << "Your current stat: " << endl;
   cout << "Dragon - Health: "
@@ -189,6 +210,18 @@ void abyssGame::level_up() {
       int new_coin = game_player->get_coins() - level_up_requirement;
       game_player->set_coins(new_coin);
       game_player->level_up();
+      // delete old monster list
+      if (game_player->get_player_level() == 2) {
+        for (int i = 0; i < 4; i++) {
+          delete game_player->get_monster_list()[i];  // delete objects
+        }
+        // delete[] game_player->get_monster_list();  // delete array of
+        // pointers game_player->get_monster_list() = new Monster*[4];
+        game_player->get_monster_list()[0] = new SuperDragon();
+        game_player->get_monster_list()[1] = new SuperTitan();
+        game_player->get_monster_list()[2] = new SuperAqua();
+        game_player->get_monster_list()[3] = new SuperSerbine();
+      }
       cout << "Level up successful! Your new stat: " << endl;
       cout << "Dragon - Health: "
            << game_player->get_monster_list()[0]->get_health()
@@ -266,10 +299,21 @@ abyssGame abyssGame::load_game() {
   game.game_player->set_coins(coins);
   game.game_player->set_player_level(player_level);
 
-  game.game_player->get_monster_list()[0]->reset_for_load(player_level);
-  game.game_player->get_monster_list()[1]->reset_for_load(player_level);
-  game.game_player->get_monster_list()[2]->reset_for_load(player_level);
-  game.game_player->get_monster_list()[3]->reset_for_load(player_level);
+  if (game.game_player->get_player_level() >= 2) {
+    for (int i = 0; i < 4; i++) {
+      delete game.game_player->get_monster_list()[i];  // delete objects
+    }
+    cout << "test done"<<endl;
+    game.game_player->get_monster_list()[0] = new SuperDragon();
+    game.game_player->get_monster_list()[1] = new SuperTitan();
+    game.game_player->get_monster_list()[2] = new SuperAqua();
+    game.game_player->get_monster_list()[3] = new SuperSerbine();
+  }
+  
+  for (int i = 0; i < 3; i++){
+  game.game_player->get_monster_list()[i]->set_monster_level(player_level);  
+  game.game_player->get_monster_list()[i]->reset_for_load(player_level);
+  }
   // game_player->set_monster(current_monster);
 
   int game_level;
@@ -277,7 +321,8 @@ abyssGame abyssGame::load_game() {
   // Load machine data
   game.game_machine = new Machine();
   game.game_machine->set_game_level(game_level);
-  game.game_machine->set_monster(1); //set cho co de go_battle function delete khong bi seg fault
+  game.game_machine->set_monster(
+      1);  // set cho co de go_battle function delete khong bi seg fault
 
   // Close the file
   load_file.close();

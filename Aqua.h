@@ -14,7 +14,7 @@ Aqua(int game_level);
 void reFill();
 void reset();
 void reset_for_load(int player_level);
-int attack(int attack_type, string opponent_type);
+virtual int attack(int attack_type, string opponent_type);
 };
 
 #endif
