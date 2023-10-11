@@ -133,8 +133,14 @@ void abyssGame::go_battle() {
       int new_coins =
           game_player->get_coins() + (game_machine->game_level * 60 + 100);
       game_player->set_coins(new_coins);
+      cout<<"Your reward: "<<(game_machine->game_level * 60 + 100)<<endl;
       cout << "Your current coins: " << new_coins << endl;
-      game_machine->game_level++;
+      //end game
+      if (game_machine->game_level == 10){
+        cout<<"Game over! Player wins"<<endl;
+      }else if(game_machine->game_level <10){
+        game_machine->game_level++;
+      }
       game_player->get_monster_list()[game_player->get_current_monster()]
           ->reset();
       break;
@@ -310,7 +316,7 @@ abyssGame abyssGame::load_game() {
     game.game_player->get_monster_list()[3] = new SuperSerbine();
   }
   
-  for (int i = 0; i < 3; i++){
+  for (int i = 0; i < 4; i++){
   game.game_player->get_monster_list()[i]->set_monster_level(player_level);  
   game.game_player->get_monster_list()[i]->reset_for_load(player_level);
   }
