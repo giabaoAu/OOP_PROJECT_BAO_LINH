@@ -34,7 +34,7 @@ class Player {
   void take_attack(int strength);
   void level_up();
   void reset();
-  void reward(bool win);
+  bool reward(bool win);
   //void draw(RenderWindow * win);
   ~Player();
   

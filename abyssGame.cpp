@@ -29,16 +29,17 @@ void abyssGame::new_game() {
   sleep(1);
   cout << "Creating your character ............" << endl;
   sleep(1);
-  string player_name;
   // error when player name has space
+  char player_name[21];
   cout << "Enter your character name (no longer than 20 characters)" << endl;
-  while (true) {
-    cin >> player_name;
-    if (player_name.length() < 21) {
-      break;
-    }
-    cout << "Invalid user name! Please enter no more than 20 characters";
-  }
+  //while (true) {
+    cin.getline(player_name, 21);
+        //if (player_name.length() < 21) {
+      cin.ignore(numeric_limits<streamsize>::max(), ' ');
+  //     break;
+  //   }
+  //   cout << "Invalid user name! Please enter no more than 20 characters";
+  // }
   game_player = new Player(player_name);
   cout << "A tarnished has risen up from the ashes ..." << endl;
   sleep(1);
@@ -130,11 +131,9 @@ void abyssGame::go_battle() {
     }
     if (game_machine->get_monster()->get_health() <= 0) {
       cout << "Machine lose" << endl;
-      int new_coins =
-          game_player->get_coins() + (game_machine->game_level * 60 + 100);
-      game_player->set_coins(new_coins);
+      game_player->reward(true);
       cout<<"Your reward: "<<(game_machine->game_level * 60 + 100)<<endl;
-      cout << "Your current coins: " << new_coins << endl;
+      cout << "Your current coins: " << game_player->get_coins() << endl;
       //end game
       if (game_machine->game_level == 10){
         cout<<"Game over! Player wins"<<endl;
@@ -158,10 +157,8 @@ void abyssGame::go_battle() {
     if (game_player->get_monster_list()[game_player->get_current_monster()]
             ->get_health() <= 0) {
       cout << "Player lose" << endl;
-      int new_coins =
-          game_player->get_coins() + (game_machine->game_level * 30 + 30);
-      game_player->set_coins(new_coins);
-      cout << "Your reward: " << new_coins << endl;
+      game_player->reward(false);
+      cout << "Your reward: " << game_player->get_coins() << endl;
       game_player->get_monster_list()[game_player->get_current_monster()]
           ->reset();
       break;
@@ -309,7 +306,7 @@ abyssGame abyssGame::load_game() {
     for (int i = 0; i < 4; i++) {
       delete game.game_player->get_monster_list()[i];  // delete objects
     }
-    cout << "test done"<<endl;
+    //cout << "test done"<<endl;
     game.game_player->get_monster_list()[0] = new SuperDragon();
     game.game_player->get_monster_list()[1] = new SuperTitan();
     game.game_player->get_monster_list()[2] = new SuperAqua();

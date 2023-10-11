@@ -1,2 +1,2 @@
 run:
-	g++ *.cpp *.h -o output
+	g++ -Wall *.cpp *.h -o output

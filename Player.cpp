@@ -24,7 +24,7 @@ bool Player::set_monster(string monster_name) {
     this->current_monster = 1;
     return 1;
   } else if (monster_name == "Aqua" || monster_name == "aqua") {
-    this->current_monster == 2;
+    this->current_monster = 2;
     return 1;
   } else if (monster_name == "Serbine" || monster_name == "serbine") {
     this->current_monster = 3;
@@ -79,11 +79,13 @@ void Player::reset() {
   monster_list[get_current_monster()]->reFill();
 }
 
-void Player::reward(bool win) {
+bool Player::reward(bool win) {
   if (win) {
-    Machine::game_level * 60 + 100;
+    int new_coins = get_coins() + (Machine::game_level * 60 + 100);
+    set_coins(new_coins);
   } else {
-    Machine::game_level * 30 + 30;
+    int new_coins = get_coins() + (Machine::game_level * 30 + 30);
+    set_coins(new_coins);
   }
 }
 
