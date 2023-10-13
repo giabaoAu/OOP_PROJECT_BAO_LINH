@@ -2,7 +2,7 @@
 
 SuperAqua::SuperAqua() : Aqua() {
   skill_name = "Call of sea";
-  monster_level = 2;
+  monster_level = 5;
   reset();
 }
 

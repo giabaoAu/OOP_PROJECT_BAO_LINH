@@ -2,7 +2,7 @@
 
 SuperTitan::SuperTitan() : Titan() {
   skill_name = "Devastating Crumbling";
-  monster_level = 2;
+  monster_level = 5;
   reset();
 }
 

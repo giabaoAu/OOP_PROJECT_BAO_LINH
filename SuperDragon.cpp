@@ -2,7 +2,7 @@
 
 SuperDragon::SuperDragon():Dragon() {
   skill_name = "Undying Flame";
-  monster_level = 2;
+  monster_level = 5;
   reset();
 }
 
