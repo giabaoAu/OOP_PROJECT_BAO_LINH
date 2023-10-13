@@ -7,9 +7,10 @@
 using namespace std;
 
 class SuperTitan:public Titan {
-    private:
     public:
+    //constructor
     SuperTitan();
+    //Added type 3 attack type
     int attack(int attack_type, string opponent_type);
 };
 

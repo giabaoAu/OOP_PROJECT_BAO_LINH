@@ -1,6 +1,8 @@
 #include "Aqua.h"
 
-Aqua::Aqua() : Monster(160, 25, 40) {}
+Aqua::Aqua() : Monster(160, 25, 40) {
+  monster_name = "Aqua";
+}
 
 Aqua::Aqua(int game_level)
     : Monster(400 + ((game_level - 1) * 200),

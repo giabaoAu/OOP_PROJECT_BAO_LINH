@@ -25,7 +25,7 @@ int Monster::get_critical_attack() { return critical_attack; }
 
 int Monster::get_monster_level() { return monster_level; }
 string Monster::get_skill_name() { return skill_name; }
-// string Monster::get_monster_type(){return monster_type;}
+string Monster::get_monster_name() { return monster_name; }
 
 void Monster::reset() {return;}
 
@@ -33,4 +33,5 @@ void Monster::reFill() {return;}
 
 void Monster::reset_for_load(int player_level) {return;}
 
-//int Monster::attack(int attack_type, string opponent_type) { return 0; }
+Monster::~Monster() {}
+

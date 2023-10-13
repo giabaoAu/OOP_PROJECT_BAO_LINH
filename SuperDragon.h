@@ -7,9 +7,10 @@
 using namespace std;
 
 class SuperDragon:public Dragon {
-    private:
     public:
+    //constructor
     SuperDragon();
+    //Added type 3 attack type
     int attack(int attack_type, string opponent_type);
 };
 #endif

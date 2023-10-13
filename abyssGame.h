@@ -15,6 +15,7 @@ class abyssGame{
     Player * game_player;
     Machine * game_machine;
     public:
+    // Detail explaination of each function is in cpp file 
     abyssGame();
     int game_menu();
     void new_game();

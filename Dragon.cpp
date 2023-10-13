@@ -1,5 +1,7 @@
 #include "Dragon.h"
-Dragon::Dragon() : Monster(210, 15, 30) {}
+Dragon::Dragon() : Monster(210, 15, 30) {
+  monster_name = "Dragon";
+}
 
 Dragon::Dragon(int game_level)
     : Monster(400 + ((game_level - 1) * 200), 10 + ((game_level - 1) * 10)) {}

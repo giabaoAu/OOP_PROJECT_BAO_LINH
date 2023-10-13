@@ -1,6 +1,7 @@
 #include "SuperSerbine.h"
 
 SuperSerbine::SuperSerbine() : Serbine() {
+  monster_name = "Super Serbine";
   skill_name = "Wind attack";
   monster_level = 5;
   reset();

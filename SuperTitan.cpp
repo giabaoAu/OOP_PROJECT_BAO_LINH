@@ -1,6 +1,7 @@
 #include "SuperTitan.h"
 
 SuperTitan::SuperTitan() : Titan() {
+  monster_name = "Super Titan";
   skill_name = "Devastating Crumbling";
   monster_level = 5;
   reset();

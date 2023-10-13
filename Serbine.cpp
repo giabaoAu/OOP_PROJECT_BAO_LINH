@@ -1,6 +1,8 @@
 #include "Serbine.h"
 
-Serbine::Serbine() : Monster(180, 20, 35) {}
+Serbine::Serbine() : Monster(180, 20, 35) {
+  monster_name = "Serbine";
+}
 
 Serbine::Serbine(int game_level)
     : Monster(400 + ((game_level - 1) * 200), 10 + ((game_level - 1) * 10)) {}

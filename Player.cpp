@@ -65,27 +65,27 @@ void Player::take_attack(int strength) {
 
 void Player::level_up() {
   // if (coins >= (player_level + 1) * 100 - 50) {
-  //   coins -= (player_level + 1) * 100 - 50;
+  coins -= (player_level + 1) * 100 - 50;
   player_level++;
   for (int i = 0; i < 4; i++) {
     monster_list[i]->reFill();
   }
 }
 
-// After each round, the player monsters stat reset to original level (level
-// before the battle)
 void Player::reset() {
   monster_list[get_current_monster()]->reFill();
   monster_list[get_current_monster()]->reFill();
 }
 
-void Player::reward(bool win) {
+int Player::reward(bool win) {
   if (win) {
     int new_coins = get_coins() + (Machine::game_level * 60 + 100);
     set_coins(new_coins);
+    return Machine::game_level * 60 + 100;
   } else {
     int new_coins = get_coins() + (Machine::game_level * 30 + 30);
     set_coins(new_coins);
+    return Machine::game_level * 30 + 3;
   }
 }
 

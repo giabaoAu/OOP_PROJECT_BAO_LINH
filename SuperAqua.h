@@ -7,9 +7,10 @@
 using namespace std;
 
 class SuperAqua:public Aqua {
-    private:
     public:
+    //constructor 
     SuperAqua();
+    //Added type 3 attack type
     int attack(int attack_type, string opponent_type);
 };
 

@@ -1,6 +1,7 @@
 #include "SuperAqua.h"
 
 SuperAqua::SuperAqua() : Aqua() {
+  monster_name = "Super Aqua";
   skill_name = "Call of sea";
   monster_level = 5;
   reset();
