@@ -1,0 +1,17 @@
+Version testing
+1. End game testing
+2. 
+
+Unit testing
+1. Level up 
+2. Super monster class
+3. Save game / Load game
+
+(non)Functional requirement:
+Another object can print or display the state of an object on the screen using operator overloading or a custom display function. (1/2)
+Can store and recall multiple entries of data/objects, such as in a database or game stats, using containers like vectors, lists, or maps 
+Has an intuitive and functional user menu, implemented using menus, prompts, or other user interface elements that make it clear what actions the user can take.
+Well-commented code with function comments in the headers that clearly explain the purpose, inputs, and outputs of each function and adhere to a consistent commenting style and formatting
+Test a good portion of your program in a structured way with unit testing and organized input/output testing.
+Makefile builds the program without errors or warnings, handles dependencies, and has options for debug/release builds, cleaning, and other common tasks.
+It runs without crashing or going into infinite loops even when the tutor attempts to break it (reasonably), using exception handling, error checking, or other defensive programming techniques to handle unexpected inputs or situations.

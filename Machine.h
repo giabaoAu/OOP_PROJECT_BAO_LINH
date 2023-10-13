@@ -2,7 +2,7 @@
 #define MACHINE_H
 
 #include <string>
-
+#include <iostream>
 #include "Aqua.h"
 #include "Dragon.h"
 #include "Monster.h"
@@ -35,6 +35,7 @@ class Machine {
   void set_monster(int index);
   void take_attack(int strength);
   void set_game_level(int _game_level);
+  void display_attack();
 
   ~Machine();
 };

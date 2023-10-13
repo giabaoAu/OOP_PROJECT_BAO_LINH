@@ -47,4 +47,9 @@ void Machine::take_attack(int strength) {
 
 void Machine::set_game_level(int _game_level) {game_level = _game_level;}
 
+void Machine::display_attack() {
+      cout << "You take " << get_strength()<< " damage." <<endl;  
+      // object machine display the state of object monster
+}
+
 Machine::~Machine() { delete *machine_monster; }

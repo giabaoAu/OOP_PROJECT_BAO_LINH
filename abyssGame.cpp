@@ -125,9 +125,8 @@ void abyssGame::go_battle() {
     // Display in terminal player attack damage annd machine remained health based on different attack type the user chose 
     int strength = game_player->attack(game_machine, attack_type);
     if (attack_type == 1) {
-      cout << "Your attack damage: " << strength
-           << ". Machine remained health: "
-           << game_machine->get_monster()->get_health() << endl;
+      game_player->display_attack(strength);
+      cout << "Machine remained health: " << game_machine->get_monster()->get_health() << endl;
     } else if (attack_type == 2) {
       cout
           << "Your attack damage: " << strength << ". Machine remained health: "
@@ -169,11 +168,14 @@ void abyssGame::go_battle() {
 
     // Display in terminal the damage the player took and their remained health
     game_player->take_attack(game_machine->get_strength());
-    cout << "You take " << game_machine->get_strength()
-         << " damage. Remained health: "
+    // cout << "You take " << game_machine->get_strength()
+    //      << " damage." <<endl;     // game_machine->display()
+        game_machine->display_attack();
+        cout<<"Remained health: "
          << game_player->get_monster_list()[game_player->get_current_monster()]
                 ->get_health()
          << endl;
+
     sleep(1);
     if (game_player->get_monster_list()[game_player->get_current_monster()]
             ->get_health() <= 0) {

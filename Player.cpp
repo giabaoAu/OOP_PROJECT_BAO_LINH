@@ -79,7 +79,7 @@ void Player::reset() {
   monster_list[get_current_monster()]->reFill();
 }
 
-bool Player::reward(bool win) {
+void Player::reward(bool win) {
   if (win) {
     int new_coins = get_coins() + (Machine::game_level * 60 + 100);
     set_coins(new_coins);
@@ -89,6 +89,8 @@ bool Player::reward(bool win) {
   }
 }
 
-// void Player::draw(RenderWindow* win) {}
+void Player::display_attack(int strength) {
+  cout << "Machine takes " << strength<<" damage"<<endl;
+}
 
 Player::~Player() {}
