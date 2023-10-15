@@ -215,24 +215,6 @@ void abyssGame::level_up() {
        << " - Critical attack: "
        << game_player->get_monster_list()[i]->get_critical_attack() << endl;
   }
-  // cout << "Dragon - Health: "
-  //      << game_player->get_monster_list()[0]->get_health()
-  //      << " - Strength: " << game_player->get_monster_list()[0]->get_strength()
-  //      << " - Critical attack: "
-  //      << game_player->get_monster_list()[0]->get_critical_attack() << endl;
-  // cout << "Titan - Health: " << game_player->get_monster_list()[1]->get_health()
-  //      << " - Strength: " << game_player->get_monster_list()[1]->get_strength()
-  //      << " - Critical attack: "
-  //      << game_player->get_monster_list()[1]->get_critical_attack() << endl;
-  // cout << "Aqua - Health: " << game_player->get_monster_list()[2]->get_health()
-  //      << " - Strength: " << game_player->get_monster_list()[2]->get_strength()
-  //      << " - Critical attack: "
-  //      << game_player->get_monster_list()[2]->get_critical_attack() << endl;
-  // cout << "Serbine - Health: "
-  //      << game_player->get_monster_list()[3]->get_health()
-  //      << " - Strength: " << game_player->get_monster_list()[3]->get_strength()
-  //      << " - Critical attack: "
-  //      << game_player->get_monster_list()[3]->get_critical_attack() << endl;
   cout << "Your coins: " << game_player->get_coins() << endl;
   int level_up_requirement = (game_player->get_player_level() + 1) * 100 - 50;
   cout << "Level up requirement from level " << game_player->get_player_level()
@@ -278,30 +260,6 @@ void abyssGame::level_up() {
        << " - Critical attack: "
        << game_player->get_monster_list()[i]->get_critical_attack() << endl;
   }
-      // cout << "Dragon - Health: "
-      //      << game_player->get_monster_list()[0]->get_health()
-      //      << " - Strength: "
-      //      << game_player->get_monster_list()[0]->get_strength()
-      //      << " - Critical attack: "
-      //      << game_player->get_monster_list()[0]->get_critical_attack() << endl;
-      // cout << "Titan - Health: "
-      //      << game_player->get_monster_list()[1]->get_health()
-      //      << " - Strength: "
-      //      << game_player->get_monster_list()[1]->get_strength()
-      //      << " - Critical attack: "
-      //      << game_player->get_monster_list()[1]->get_critical_attack() << endl;
-      // cout << "Aqua - Health: "
-      //      << game_player->get_monster_list()[2]->get_health()
-      //      << " - Strength: "
-      //      << game_player->get_monster_list()[2]->get_strength()
-      //      << " - Critical attack: "
-      //      << game_player->get_monster_list()[2]->get_critical_attack() << endl;
-      // cout << "Serbine - Health: "
-      //      << game_player->get_monster_list()[3]->get_health()
-      //      << " - Strength: "
-      //      << game_player->get_monster_list()[3]->get_strength()
-      //      << " - Critical attack: "
-      //      << game_player->get_monster_list()[3]->get_critical_attack() << endl;
       cout << "Your remained coins: " << game_player->get_coins() << endl;
     } else if (game_player->get_coins() < level_up_requirement) {
       cout << "Not enough coins" << endl;
