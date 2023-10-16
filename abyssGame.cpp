@@ -173,8 +173,9 @@ void abyssGame::go_battle() {
       cout << "Machine lose" << endl;
       cout << "Your reward: " << game_player->reward(true) << endl;
       cout << "Your current coins: " << game_player->get_coins() << endl;
-      game_player->get_monster_list()[game_player->get_current_monster()]
-          ->reset();
+      // game_player->get_monster_list()[game_player->get_current_monster()]
+      //     ->reset();
+      game_player->reset();
       // When the player win against level 10 machine then the game
       // User can continue to play and level up their player however, the
       // machine level will remain at level 10
@@ -205,8 +206,9 @@ void abyssGame::go_battle() {
       cout << "Player lose" << endl;
       cout << "Your reward: " << game_player->reward(false) << endl;
       cout << "Your current coins: " << game_player->get_coins() << endl;
-      game_player->get_monster_list()[game_player->get_current_monster()]
-          ->reset();
+      // game_player->get_monster_list()[game_player->get_current_monster()]
+      //     ->reset();
+      game_player->reset();
       break;
     }
   }
@@ -320,13 +322,11 @@ void abyssGame::save_game() {
   cout << player_name1 << endl;
   cout << player_name2 << endl;
   if (player_name1 == game_player->get_player_name()) {
-    cout << "Same name 1" << endl;
     coins1 = game_player->get_coins();
     player_level1 = game_player->get_player_level();
     machine_level1 = game_machine->game_level;
     same_name_checking = true;
   } else if (player_name2 == game_player->get_player_name()) {
-    cout << "Same name 2" << endl;
     coins2 = game_player->get_coins();
     player_level2 = game_player->get_player_level();
     machine_level2 = game_machine->game_level;
@@ -376,7 +376,7 @@ abyssGame abyssGame::load_game() {
 
   // Check if the file is open
   if (!load_file.is_open()) {
-    std::cout << "No saved game found." << std::endl;
+    cout << "No saved game found." << endl;
     exit(1);
   }
 
@@ -418,13 +418,9 @@ abyssGame abyssGame::load_game() {
   vector<int> load_stats;
   if (first_map.find(player_name) != first_map.end()) {
     load_stats = first_map[player_name];
-    for (auto i = load_stats.begin(); i != load_stats.end(); ++i)
-      cout << *i << " ";
   }
   if (second_map.find(player_name) != second_map.end()) {
     load_stats = second_map[player_name];
-    for (auto i = load_stats.begin(); i != load_stats.end(); ++i)
-      cout << *i << " ";
   }
 
   abyssGame game;

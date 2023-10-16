@@ -73,8 +73,7 @@ void Player::level_up() {
 }
 
 void Player::reset() {
-  monster_list[get_current_monster()]->reFill();
-  monster_list[get_current_monster()]->reFill();
+  monster_list[get_current_monster()]->reset();
 }
 
 int Player::reward(bool win) {
