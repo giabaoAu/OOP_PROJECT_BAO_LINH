@@ -50,3 +50,5 @@ int Aqua::attack(int attack_type, string opponent_type) {
       return strength;
   }
 }
+
+Aqua::~Aqua() {}

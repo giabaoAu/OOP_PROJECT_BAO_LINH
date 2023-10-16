@@ -49,3 +49,5 @@ void Titan::reset_for_load(int player_level) {
   set_health(250 + ((player_level - 1) * 60));
   set_critical_attack(25 + ((player_level - 1) * 10));
 }
+
+Titan::~Titan() {}

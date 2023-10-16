@@ -19,6 +19,7 @@ void reFill();
 void reset();
 //Reset the stat for game loading
 void reset_for_load(int player_level);
+~Titan();
 };
 
 #endif

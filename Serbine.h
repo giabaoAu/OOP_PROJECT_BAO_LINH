@@ -19,6 +19,7 @@ void reset();
 void reset_for_load(int player_level);
 //Attack function thats unique to each type of monster
 virtual int attack(int attack_type, string opponent_type);
+~Serbine();
 };
 
 #endif

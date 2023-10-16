@@ -1,12 +1,13 @@
-#include <string>
 #include <fstream>
+#include <string>
+
 #include "Machine.h"
 #include "abyssGame.h"
 using namespace std;
 string Machine::monster_type;
 int Machine::game_level;
 int main() {
-    int total_line = 0;
+  int total_line = 0;
   string temporary;
   ifstream check("game_saved.txt");
   if (!check.is_open()) {
@@ -17,28 +18,41 @@ int main() {
     getline(check, temporary);
     total_line++;
   }
+  cout<<total_line<<endl;
   check.clear();
   check.seekg(0, ios::beg);
   check.close();
-
-  // Show the game interface when user first load the game. They have 2 options
-  if(total_line < 7){
-  cout << "1. New game" << endl;
-  cout << "2. Load game" << endl;
-  }else {
-    cout<<"Max database capacity reach"<<endl;
-    cout << "1. Load game" << endl;
-  }
   int option;
-  // Exceptional handling when user either enter string or unexpected integer
+  // Show the game interface when user first load the game. They have 2 options
   while (true) {
-    cin >> option;
-    if (cin.fail() || (option != 1 && option != 2)) {
-      cout << "Please enter number 1 or 2" << endl;
-      cin.clear();
-      cin.ignore();
-    } else if (option == 1 || option == 2) {
+    cout << "1. New game" << endl;
+    cout << "2. Load game" << endl;
+    // Exceptional handling when user either enter string or unexpected integer
+    while (true) {
+      cin >> option;
+      if (cin.fail() || (option != 1 && option != 2)) {
+        cout << "Please enter number 1 or 2" << endl;
+        cin.clear();
+        cin.ignore();
+      } else if (option == 1 || option == 2) {
+        break;
+      }
+    }
+    if(option == 2){
       break;
+    }
+    char option1;
+    if (total_line >= 8) {
+      cout << "Max database capacity reach. If you play a new game, all of the "
+              "existing games will be deleted!"
+           << endl;
+      cout << "Y/N" << endl;
+      cin >> option1;
+      if (option1 == 'Y') {
+        ofstream save_file("game_saved.txt");
+        save_file << 0 << endl;
+        break;
+      }
     }
   }
   // Create game object
@@ -49,8 +63,8 @@ int main() {
   if (option == 1) {
     game.new_game();
     game.go_battle();
-    // After the end of tutorial, the player comes back to user menu which have
-    // 3 options
+    // After the end of tutorial, the player comes back to user menu which
+    // have 3 options
     while (true) {
       int option = game.game_menu();
       if (option == 1) {

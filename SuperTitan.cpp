@@ -36,3 +36,5 @@ int SuperTitan::attack(int attack_type, string opponent_type) {
       return strength;
   }
 }
+
+SuperTitan::~SuperTitan() {}

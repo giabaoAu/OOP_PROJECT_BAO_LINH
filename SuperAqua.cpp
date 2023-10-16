@@ -36,3 +36,5 @@ int SuperAqua::attack(int attack_type, string opponent_type) {
       return strength;
   }
 }
+
+SuperAqua::~SuperAqua() {}

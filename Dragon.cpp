@@ -47,3 +47,5 @@ void Dragon::reset_for_load(int player_level) {
   set_health(210 + ((player_level - 1) * 45));
   set_critical_attack(30 + ((player_level - 1) * 15));
 }
+
+Dragon::~Dragon() {}

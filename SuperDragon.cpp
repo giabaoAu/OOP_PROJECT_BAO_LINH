@@ -36,3 +36,5 @@ int SuperDragon::attack(int attack_type, string opponent_type) {
       return strength;
   }
 }
+
+SuperDragon::~SuperDragon() {}

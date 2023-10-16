@@ -12,6 +12,7 @@ class SuperSerbine: public Serbine {
     SuperSerbine();
     //Added type 3 attack type
     int attack(int attack_type, string opponent_type);
+    ~SuperSerbine();
 };
 
 #endif

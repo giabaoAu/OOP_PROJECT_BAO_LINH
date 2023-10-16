@@ -48,3 +48,5 @@ int Serbine::attack(int attack_type, string opponent_type) {
       return strength;
   }
 }
+
+Serbine::~Serbine() {}
