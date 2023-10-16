@@ -1,6 +1,8 @@
 #include "Titan.h"
 #include <iostream>
-Titan::Titan() : Monster(250, 10, 25) {}
+Titan::Titan() : Monster(250, 10, 25) {
+  monster_name = "Titan";
+}
 
 Titan::Titan(int game_level)
     : Monster(400 + ((game_level - 1) * 200),

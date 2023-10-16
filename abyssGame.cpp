@@ -319,8 +319,6 @@ void abyssGame::save_game() {
   }
   check.close();
   cout << game_player->get_player_name() << endl;
-  cout << player_name1 << endl;
-  cout << player_name2 << endl;
   if (player_name1 == game_player->get_player_name()) {
     coins1 = game_player->get_coins();
     player_level1 = game_player->get_player_level();
@@ -331,6 +329,8 @@ void abyssGame::save_game() {
     player_level2 = game_player->get_player_level();
     machine_level2 = game_machine->game_level;
     same_name_checking = true;
+  } else {
+    same_name_checking = false;
   }
   if (total_line < 7 && same_name_checking == false) {
     ofstream save_file("game_saved.txt", ios::app);
@@ -401,19 +401,19 @@ abyssGame abyssGame::load_game() {
   second_map[player_name2] = stats2;
   cout << "1. " << player_name1 << endl;
   cout << "2. " << player_name2 << endl;
-  cout << "Enter your player name: " << endl;
+  cout << "Enter your player name: (type N to exit)" << endl;
   string player_name;
   while (true) {
     cin >> player_name;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    if (player_name != player_name1 && player_name != player_name2) {
+    if (player_name == "N"){
+      exit(0);
+    } else if(player_name != player_name1 && player_name != player_name2) {  
       cout << "Please check your spelling" << endl;
       cout << "1. " << player_name1 << endl;
       cout << "2. " << player_name2 << endl;
-      cout << "Enter your player name: " << endl;
-    } else {
-      break;
-    }
+      cout << "Enter your player name: (type N to exit) " << endl;
+      }
   }
   vector<int> load_stats;
   if (first_map.find(player_name) != first_map.end()) {

@@ -34,7 +34,7 @@ int main() {
       try {
         option = stoi(option_holder);
       } catch (std::invalid_argument const& e) {
-        cout << "Please enter a valid integer" << endl;
+        cout << "Please enter a valid intege" << endl;
         continue;
       }
       if (cin.fail() || (option != 1 && option != 2)) {
