@@ -1,14 +1,34 @@
 #include <string>
-
+#include <fstream>
 #include "Machine.h"
 #include "abyssGame.h"
 using namespace std;
 string Machine::monster_type;
 int Machine::game_level;
 int main() {
+    int total_line = 0;
+  string temporary;
+  ifstream check("game_saved.txt");
+  if (!check.is_open()) {
+    std::cout << "No saved game found." << std::endl;
+    exit(1);
+  }
+  while (!check.eof()) {
+    getline(check, temporary);
+    total_line++;
+  }
+  check.clear();
+  check.seekg(0, ios::beg);
+  check.close();
+
   // Show the game interface when user first load the game. They have 2 options
+  if(total_line < 7){
   cout << "1. New game" << endl;
   cout << "2. Load game" << endl;
+  }else {
+    cout<<"Max database capacity reach"<<endl;
+    cout << "1. Load game" << endl;
+  }
   int option;
   // Exceptional handling when user either enter string or unexpected integer
   while (true) {

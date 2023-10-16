@@ -5,10 +5,8 @@
 
 using namespace std;
 
-int main() {
+int testing() {
     //save game
-  ofstream test1;
-
   int total_line = 0;
   string temporary;
   ifstream check;
@@ -21,6 +19,7 @@ int main() {
   cout << total_line<<endl;;
 
   if (total_line < 6) {
+    ofstream test1;
     test1.open(
         "map_test.txt",
         ios::app);  // apending new element without overwritting the old one

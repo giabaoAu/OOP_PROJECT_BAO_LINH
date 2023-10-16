@@ -1,6 +1,8 @@
 #include "abyssGame.h"
 
 #include <fstream>
+#include <map>
+#include <vector>
 
 // Abyss game constructor
 abyssGame::abyssGame() {}
@@ -37,12 +39,12 @@ void abyssGame::new_game() {
   cout << "Creating your character ............" << endl;
   sleep(1);
   // error when player name has space
-  char player_name[21];
+  string player_name;
   cout << "Enter your character name (no longer than 20 characters)" << endl;
   // while (true) {
-  cin.getline(player_name, 21);
+  cin >> player_name;
   // if (player_name.length() < 21) {
-  cin.ignore(numeric_limits<streamsize>::max(), ' ');
+  // cin.ignore(numeric_limits<streamsize>::max(), ' ');
   //     break;
   //   }
   //   cout << "Invalid user name! Please enter no more than 20 characters";
@@ -155,7 +157,7 @@ void abyssGame::go_battle() {
            << game_machine->get_monster()->get_health() << endl;
     }
 
-    //Check if player win the game 
+    // Check if player win the game
     if (game_machine->get_monster()->get_health() <= 0) {
       cout << "Machine lose" << endl;
       cout << "Your reward: " << game_player->reward(true) << endl;
@@ -186,7 +188,7 @@ void abyssGame::go_battle() {
          << endl;
 
     sleep(1);
-    //Check if player lose the game
+    // Check if player lose the game
     if (game_player->get_monster_list()[game_player->get_current_monster()]
             ->get_health() <= 0) {
       cout << "Player lose" << endl;
@@ -209,11 +211,13 @@ void abyssGame::level_up() {
   // Rewrite this to make it shorter - using for loop
   cout << "LEVEL UP PAGE:" << endl;
   cout << "Your current stats: " << endl;
-  for (int i = 0; i<4; i++){
-  cout<<game_player->get_monster_list()[i]->get_monster_name()<<" - Health: "<< game_player->get_monster_list()[i]->get_health()
-       << " - Strength: " << game_player->get_monster_list()[i]->get_strength()
-       << " - Critical attack: "
-       << game_player->get_monster_list()[i]->get_critical_attack() << endl;
+  for (int i = 0; i < 4; i++) {
+    cout << game_player->get_monster_list()[i]->get_monster_name()
+         << " - Health: " << game_player->get_monster_list()[i]->get_health()
+         << " - Strength: "
+         << game_player->get_monster_list()[i]->get_strength()
+         << " - Critical attack: "
+         << game_player->get_monster_list()[i]->get_critical_attack() << endl;
   }
   cout << "Your coins: " << game_player->get_coins() << endl;
   int level_up_requirement = (game_player->get_player_level() + 1) * 100 - 50;
@@ -254,12 +258,16 @@ void abyssGame::level_up() {
         game_player->get_monster_list()[3] = new SuperSerbine();
       }
       cout << "Level up successful! Your new stat: " << endl;
-        for (int i = 0; i<4; i++){
-  cout<<game_player->get_monster_list()[i]->get_monster_name()<<" - Health: "<< game_player->get_monster_list()[i]->get_health()
-       << " - Strength: " << game_player->get_monster_list()[i]->get_strength()
-       << " - Critical attack: "
-       << game_player->get_monster_list()[i]->get_critical_attack() << endl;
-  }
+      for (int i = 0; i < 4; i++) {
+        cout << game_player->get_monster_list()[i]->get_monster_name()
+             << " - Health: "
+             << game_player->get_monster_list()[i]->get_health()
+             << " - Strength: "
+             << game_player->get_monster_list()[i]->get_strength()
+             << " - Critical attack: "
+             << game_player->get_monster_list()[i]->get_critical_attack()
+             << endl;
+      }
       cout << "Your remained coins: " << game_player->get_coins() << endl;
     } else if (game_player->get_coins() < level_up_requirement) {
       cout << "Not enough coins" << endl;
@@ -271,24 +279,83 @@ void abyssGame::level_up() {
 
 // Save game function
 void abyssGame::save_game() {
-  ofstream save_file("game_saved.txt");
-
-  if (!save_file.is_open()) {
-    cout << "Error! Unable to open saved file. " << endl;
-    return;
+  int total_line = 0;
+  string temporary;
+  ifstream check("game_saved.txt");
+  if (!check.is_open()) {
+    std::cout << "No saved game found." << std::endl;
+    exit(1);
   }
+  while (!check.eof()) {
+    getline(check, temporary);
+    total_line++;
+  }
+  check.clear();
+  check.seekg(0, ios::beg);
+  string player_name1, player_name2;
+  int temp;
+  int coins1, player_level1, machine_level1;
+  int coins2, player_level2, machine_level2;
+  bool same_name_checking;
+  if(total_line > 1){
+  check >> temp >> player_name1 >> coins1 >> player_level1 >> machine_level1;
+  }
+  if (total_line >= 7) {
+    check >> player_name2 >> coins2 >> player_level2 >> machine_level2;
+  }
+  check.close();
+  cout << game_player->get_player_name() << endl;
+  cout << player_name1 << endl;
+  cout << player_name2 << endl;
+  if (player_name1 == game_player->get_player_name()) {
+    cout << "Same name 1" << endl;
+    coins1 = game_player->get_coins();
+    player_level1 = game_player->get_player_level();
+    machine_level1 = game_machine->game_level;
+    same_name_checking = true;
+  } else if (player_name2 == game_player->get_player_name()) {
+    cout << "Same name 2" << endl;
+    coins2 = game_player->get_coins();
+    player_level2 = game_player->get_player_level();
+    machine_level2 = game_machine->game_level;
+    same_name_checking = true;
+  }
+  if (total_line < 7 && same_name_checking == false) {
+    ofstream save_file("game_saved.txt", ios::app);
 
-  // Save player data
-  save_file << game_player->get_coins() << endl;
-  save_file << game_player->get_player_name() << endl;
-  save_file << game_player->get_player_level() << endl;
+    if (!save_file.is_open()) {
+      cout << "Error! Unable to open saved file. " << endl;
+      return;
+    }
+    // Save player data
+    save_file << game_player->get_player_name() << endl;
+    save_file << game_player->get_coins() << endl;
+    save_file << game_player->get_player_level() << endl;
 
-  // For machine
-  save_file << game_machine->game_level;
-  // Close the file
-  save_file.close();
-
-  cout << "Game saved successfully." << endl;
+    // For machine
+    save_file << game_machine->game_level << endl;
+    // Close the file
+    save_file.close();
+    cout << "Game saved successfully." << endl;
+  } else if (total_line < 7 && same_name_checking == true) {
+    ofstream save_file("game_saved.txt");
+    save_file << 0 << endl;
+    save_file << player_name1 << endl;
+    save_file << coins1 << endl;
+    save_file << player_level1 << endl;
+    save_file << machine_level1 << endl;
+  } else if (total_line >= 11 || same_name_checking == true) {
+    ofstream save_file("game_saved.txt");
+    save_file << 0 << endl;
+    save_file << player_name1 << endl;
+    save_file << coins1 << endl;
+    save_file << player_level1 << endl;
+    save_file << machine_level1 << endl;
+    save_file << player_name2 << endl;
+    save_file << coins2 << endl;
+    save_file << player_level2 << endl;
+    save_file << machine_level2 << endl;
+  }
 }
 
 // Load existing game function
@@ -302,16 +369,47 @@ abyssGame abyssGame::load_game() {
   }
 
   // Load player data
+  map<string, vector<int>> first_map, second_map;
+  vector<int> stats1, stats2;
+  string player_name1, player_name2;
+  int temp;
+  int coins1, player_level1, machine_level1;
+  int coins2, player_level2, machine_level2;
+  load_file >> temp >> player_name1 >> coins1 >> player_level1 >>
+      machine_level1;
+  load_file >> player_name2 >> coins2 >> player_level2 >> machine_level2;
+  stats1.push_back(coins1);
+  stats1.push_back(player_level1);
+  stats1.push_back(machine_level1);
+  first_map[player_name1] = stats1;
+
+  stats2.push_back(coins2);
+  stats2.push_back(player_level2);
+  stats2.push_back(machine_level2);
+  second_map[player_name2] = stats2;
+  cout << "1. " << player_name1 << endl;
+  cout << "2. " << player_name2 << endl;
+  cout << "Enter your player name: " << endl;
   string player_name;
-  int coins, player_level;
+  cin >> player_name;
+  // std::getline(std::cin, player_name);
+  vector<int> load_stats;
+  if (first_map.find(player_name) != first_map.end()) {
+    load_stats = first_map[player_name];
+    for (auto i = load_stats.begin(); i != load_stats.end(); ++i)
+      cout << *i << " ";
+  }
+  if (second_map.find(player_name) != second_map.end()) {
+    load_stats = second_map[player_name];
+    for (auto i = load_stats.begin(); i != load_stats.end(); ++i)
+      cout << *i << " ";
+  }
 
   abyssGame game;
-
-  load_file >> coins >> player_name >> player_level;
   game.game_player = new Player(player_name);
-  game.game_player->set_coins(coins);
-  game.game_player->set_player_level(player_level);
-
+  game.game_player->set_coins(load_stats[0]);
+  game.game_player->set_player_level(load_stats[1]);
+  int player_level = load_stats[1];
   // If the loaded game has player level higher than 5, then change the player
   // normal monster class to super monster
   if (game.game_player->get_player_level() >= 5) {
@@ -330,8 +428,7 @@ abyssGame abyssGame::load_game() {
     game.game_player->get_monster_list()[i]->reset_for_load(player_level);
   }
 
-  int game_level;
-  load_file >> game_level;
+  int game_level = load_stats[2];
   // Load machine data
   game.game_machine = new Machine();
   game.game_machine->set_game_level(game_level);
