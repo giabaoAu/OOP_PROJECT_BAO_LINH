@@ -17,9 +17,17 @@ int abyssGame::game_menu() {
   // The player has 3 options to choose from the user menu. The program will
   // receive input from the user The program has exceptional handling technique
   // to check if the user entered correct integer
+  string option_holder;
   int option;
   while (true) {
-    cin >> option;
+    cin >> option_holder;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    try {
+      option = stoi(option_holder);
+    } catch (std::invalid_argument const& e) {
+      cout << "Please enter number valid integer" << endl;
+      continue;
+    }
     if (cin.fail() || (option != 1 && option != 2 && option != 3)) {
       cout << "Please enter number 1, 2 or 3." << endl;
       cin.clear();
@@ -40,15 +48,10 @@ void abyssGame::new_game() {
   sleep(1);
   // error when player name has space
   string player_name;
-  cout << "Enter your character name (no longer than 20 characters)" << endl;
-  // while (true) {
+  cout << "Enter your character name: " << endl;
   cin >> player_name;
-  // if (player_name.length() < 21) {
-  // cin.ignore(numeric_limits<streamsize>::max(), ' ');
-  //     break;
-  //   }
-  //   cout << "Invalid user name! Please enter no more than 20 characters";
-  // }
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
   game_player = new Player(player_name);
   cout << "A tarnished has risen up from the ashes ..." << endl;
   sleep(1);
@@ -82,6 +85,7 @@ void abyssGame::go_battle() {
   string player_monster_type;
   while (true) {
     cin >> player_monster_type;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     bool check;
     check = game_player->set_monster(player_monster_type);
     if (check) {
@@ -110,13 +114,20 @@ void abyssGame::go_battle() {
                   ->get_skill_name()
            << endl;
     }
+    string holder_attack_type;
     int attack_type;
     // Exceptional handling for attack type. Check if player enter the correct
     // number Attack type 3 will only appear when user reach level 5.
     while (true) {
-      cin >> attack_type;
-      if (cin.fail() ||
-          (attack_type != 1 && attack_type != 2 && attack_type != 3)) {
+      cin >> holder_attack_type;
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      try {
+        attack_type = stoi(holder_attack_type);
+      } catch (std::invalid_argument const& e) {
+        cout << "Please enter a valid integer" << endl;
+        continue;
+      }
+      if (attack_type != 1 && attack_type != 2 && attack_type != 3) {
         if (game_player->get_player_level() < 5) {
           cout << "Please enter number 1 or 2." << endl;
         } else if (game_player->get_player_level() >= 5) {
@@ -230,6 +241,7 @@ void abyssGame::level_up() {
   // Exceptional handling if user enter different format
   while (true) {
     cin >> answer;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     if (cin.fail() || (answer != "Y" && answer != "N")) {
       cout << "Please choose again. Type Y/N" << endl;
     } else if (answer == "Y" || answer == "N") {
@@ -297,8 +309,8 @@ void abyssGame::save_game() {
   int coins1, player_level1, machine_level1;
   int coins2, player_level2, machine_level2;
   bool same_name_checking;
-  if(total_line > 1){
-  check >> temp >> player_name1 >> coins1 >> player_level1 >> machine_level1;
+  if (total_line > 1) {
+    check >> temp >> player_name1 >> coins1 >> player_level1 >> machine_level1;
   }
   if (total_line >= 7) {
     check >> player_name2 >> coins2 >> player_level2 >> machine_level2;
@@ -391,8 +403,18 @@ abyssGame abyssGame::load_game() {
   cout << "2. " << player_name2 << endl;
   cout << "Enter your player name: " << endl;
   string player_name;
-  cin >> player_name;
-  // std::getline(std::cin, player_name);
+  while (true) {
+    cin >> player_name;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    if (player_name != player_name1 && player_name != player_name2) {
+      cout << "Please check your spelling" << endl;
+      cout << "1. " << player_name1 << endl;
+      cout << "2. " << player_name2 << endl;
+      cout << "Enter your player name: " << endl;
+    } else {
+      break;
+    }
+  }
   vector<int> load_stats;
   if (first_map.find(player_name) != first_map.end()) {
     load_stats = first_map[player_name];

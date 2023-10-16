@@ -18,10 +18,10 @@ int main() {
     getline(check, temporary);
     total_line++;
   }
-  cout<<total_line<<endl;
   check.clear();
   check.seekg(0, ios::beg);
   check.close();
+  string option_holder;
   int option;
   // Show the game interface when user first load the game. They have 2 options
   while (true) {
@@ -29,7 +29,14 @@ int main() {
     cout << "2. Load game" << endl;
     // Exceptional handling when user either enter string or unexpected integer
     while (true) {
-      cin >> option;
+      cin >> option_holder;
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      try {
+        option = stoi(option_holder);
+      } catch (std::invalid_argument const& e) {
+        cout << "Please enter a valid integer" << endl;
+        continue;
+      }
       if (cin.fail() || (option != 1 && option != 2)) {
         cout << "Please enter number 1 or 2" << endl;
         cin.clear();
@@ -38,11 +45,11 @@ int main() {
         break;
       }
     }
-    if(option == 2){
+    if (option == 2) {
       break;
     }
     char option1;
-    if (total_line >= 8) {
+    if (total_line >= 7) {
       cout << "Max database capacity reach. If you play a new game, all of the "
               "existing games will be deleted!"
            << endl;
@@ -53,6 +60,8 @@ int main() {
         save_file << 0 << endl;
         break;
       }
+    } else if (total_line <= 6) {
+      break;
     }
   }
   // Create game object
