@@ -48,7 +48,7 @@ void abyssGame::new_game() {
   sleep(1);
   // error when player name has space
   string player_name;
-  cout << "   Enter your character name: " << endl;
+  cout << "   Enter your character name, no space allowed: " << endl;
   cin >> player_name;
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
