@@ -74,6 +74,12 @@ void abyssGame::go_battle() {
     delete game_machine->get_monster();
   }
   game_machine->set_monster(index);
+  
+  // Display game title
+  const char* filename = "theAbyssArt.txt";
+
+  // Use the system function to run the cat command.
+  string command = "cat " + string(filename);
 
   // Player will be notified which mosnter type the machine use and therefore
   // prompt to choose a type they will use in the battle The program use
@@ -140,6 +146,15 @@ void abyssGame::go_battle() {
       }
     }
 
+#ifdef _WIN32
+    // Windows
+    system("cls");
+#else
+    // Linux, Unix, macOS
+    system("clear");
+#endif
+    system(command.c_str());
+
     // Display in terminal player attack damage annd machine remained health
     // based on different attack type the user chose
     int strength = game_player->attack(game_machine, attack_type);
@@ -170,7 +185,7 @@ void abyssGame::go_battle() {
 
     // Check if player win the game
     if (game_machine->get_monster()->get_health() <= 0) {
-      cout << "Machine lose" << endl;
+      cout << "Machine lost" << endl;
       cout << "Your reward: " << game_player->reward(true) << endl;
       cout << "Your current coins: " << game_player->get_coins() << endl;
       // game_player->get_monster_list()[game_player->get_current_monster()]
@@ -184,6 +199,15 @@ void abyssGame::go_battle() {
       } else if (game_machine->game_level < 10) {
         game_machine->game_level++;
       }
+      sleep(4);
+#ifdef _WIN32
+      // Windows
+      system("cls");
+#else
+      // Linux, Unix, macOS
+      system("clear");
+#endif
+      system(command.c_str());
       break;
     }
 
@@ -194,22 +218,41 @@ void abyssGame::go_battle() {
     // Display in terminal the damage the player took and their remained health
     game_player->take_attack(game_machine->get_strength());
     game_machine->display_attack();
-    cout << "Remained health: "
+    cout << "Your remained health: "
          << game_player->get_monster_list()[game_player->get_current_monster()]
                 ->get_health()
          << endl;
 
-    sleep(1);
+    sleep(4);
+
+#ifdef _WIN32
+    // Windows
+    system("cls");
+#else
+    // Linux, Unix, macOS
+    system("clear");
+#endif
+    system(command.c_str());
+
     // Check if player lose the game
     if (game_player->get_monster_list()[game_player->get_current_monster()]
             ->get_health() <= 0) {
-      cout << "Player lose" << endl;
+      cout << "Player lost" << endl;
       cout << "Your reward: " << game_player->reward(false) << endl;
       cout << "Your current coins: " << game_player->get_coins() << endl;
       // game_player->get_monster_list()[game_player->get_current_monster()]
       //     ->reset();
       game_player->reset();
       break;
+      sleep(3);
+#ifdef _WIN32
+      // Windows
+      system("cls");
+#else
+      // Linux, Unix, macOS
+      system("clear");
+#endif
+      system(command.c_str());
     }
   }
 }
@@ -217,6 +260,12 @@ void abyssGame::go_battle() {
 // Level up function for player to upgrade their stats ie. choosing option 2 in
 // user menu
 void abyssGame::level_up() {
+  // Display game title
+  const char* filename = "theAbyssArt.txt";
+
+  // Use the system function to run the cat command.
+  string command = "cat " + string(filename);
+
   // Reset monster stats  before showing the it to user.
   for (int i = 0; i < 4; i++) {
     game_player->get_monster_list()[i]->reset();
@@ -283,10 +332,27 @@ void abyssGame::level_up() {
              << endl;
       }
       cout << "Your remained coins: " << game_player->get_coins() << endl;
+      sleep(5);
+#ifdef _WIN32
+      // Windows
+      system("cls");
+#else
+      // Linux, Unix, macOS
+      system("clear");
+#endif
+      system(command.c_str());
     } else if (game_player->get_coins() < level_up_requirement) {
       cout << "Not enough coins" << endl;
     }
   } else if (answer == "N") {
+#ifdef _WIN32
+    // Windows
+    system("cls");
+#else
+    // Linux, Unix, macOS
+    system("clear");
+#endif
+    system(command.c_str());
     return;
   }
 }
@@ -318,7 +384,6 @@ void abyssGame::save_game() {
     check >> player_name2 >> coins2 >> player_level2 >> machine_level2;
   }
   check.close();
-  cout << game_player->get_player_name() << endl;
   if (player_name1 == game_player->get_player_name()) {
     coins1 = game_player->get_coins();
     player_level1 = game_player->get_player_level();
@@ -356,6 +421,7 @@ void abyssGame::save_game() {
     save_file << coins1 << endl;
     save_file << player_level1 << endl;
     save_file << machine_level1 << endl;
+    cout << "Game saved successfully." << endl;
   } else if (total_line >= 11 || same_name_checking == true) {
     ofstream save_file("game_saved.txt");
     save_file << 0 << endl;
@@ -367,11 +433,18 @@ void abyssGame::save_game() {
     save_file << coins2 << endl;
     save_file << player_level2 << endl;
     save_file << machine_level2 << endl;
+    cout << "Game saved successfully." << endl;
   }
 }
 
 // Load existing game function
 abyssGame abyssGame::load_game() {
+  // Display game title
+  const char* filename = "theAbyssArt.txt";
+
+  // Use the system function to run the cat command.
+  string command = "cat " + string(filename);
+
   ifstream load_file("game_saved.txt");
 
   // Check if the file is open
@@ -406,14 +479,16 @@ abyssGame abyssGame::load_game() {
   while (true) {
     cin >> player_name;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    if (player_name == "N"){
+    if (player_name == "N") {
       exit(0);
-    } else if(player_name != player_name1 && player_name != player_name2) {  
+    } else if (player_name != player_name1 && player_name != player_name2) {
       cout << "Please check your spelling" << endl;
       cout << "1. " << player_name1 << endl;
       cout << "2. " << player_name2 << endl;
       cout << "Enter your player name: (type N to exit) " << endl;
-      }
+    } else {
+      break;
+    }
   }
   vector<int> load_stats;
   if (first_map.find(player_name) != first_map.end()) {
@@ -457,6 +532,15 @@ abyssGame abyssGame::load_game() {
   load_file.close();
 
   cout << "Game loaded successfully." << endl;
+  sleep(1);
+#ifdef _WIN32
+  // Windows
+  system("cls");
+#else
+  // Linux, Unix, macOS
+  system("clear");
+#endif
+  system(command.c_str());
 
   return game;
 }
