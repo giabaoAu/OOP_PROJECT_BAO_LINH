@@ -2,7 +2,7 @@
 
 SuperSerbine::SuperSerbine() : Serbine() {
   monster_name = "Super Serbine";
-  skill_name = "Wind attack";
+  skill_name = "Wings of Chaos";
   monster_level = 5;
   reset();
 }

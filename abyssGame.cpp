@@ -9,11 +9,11 @@ abyssGame::abyssGame() {}
 
 // This is the game menu function which show intuitive and functional user menu
 int abyssGame::game_menu() {
-  cout << "GAME MENU:" << endl;
-  cout << "1. Go to battle" << endl;
-  cout << "2. Level up" << endl;
-  cout << "3. Quit and Save" << endl;
-  cout << "Please choose 1, 2 or 3: ";
+  cout << "   GAME MENU:" << endl;
+  cout << "   1. Go to battle" << endl;
+  cout << "   2. Level up" << endl;
+  cout << "   3. Quit and Save" << endl;
+  cout << "   Please choose 1, 2 or 3: ";
   // The player has 3 options to choose from the user menu. The program will
   // receive input from the user The program has exceptional handling technique
   // to check if the user entered correct integer
@@ -25,11 +25,11 @@ int abyssGame::game_menu() {
     try {
       option = stoi(option_holder);
     } catch (std::invalid_argument const& e) {
-      cout << "Please enter number valid integer" << endl;
+      cout << "   Please enter number valid integer" << endl;
       continue;
     }
     if (cin.fail() || (option != 1 && option != 2 && option != 3)) {
-      cout << "Please enter number 1, 2 or 3." << endl;
+      cout << "   Please enter number 1, 2 or 3." << endl;
       cin.clear();
       cin.ignore();
     } else if (option == 1 || option == 2 || option == 3) {
@@ -42,26 +42,26 @@ int abyssGame::game_menu() {
 // New game function is used when the user first started the game ie. user
 // choose to play new game rather than load an existing game from the folder
 void abyssGame::new_game() {
-  cout << "Creating a new game ............." << endl;
+  cout << "   Creating a new game ............." << endl << endl;
   sleep(1);
-  cout << "Creating your character ............" << endl;
+  cout << "   Creating your character ............" << endl << endl;
   sleep(1);
   // error when player name has space
   string player_name;
-  cout << "Enter your character name: " << endl;
+  cout << "   Enter your character name: " << endl;
   cin >> player_name;
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
   game_player = new Player(player_name);
-  cout << "A tarnished has risen up from the ashes ..." << endl;
+  cout << "   A tarnished has risen up from the ashes ..." << endl << endl;
   sleep(1);
-  cout << "Welcome to The Abyss, " << player_name << "!" << endl;
+  cout << "   Welcome to The Abyss, " << player_name << "!" << endl << endl;
   sleep(1);
-  cout << "Thy monster are being called............." << endl;
+  cout << "   Thy monster are being called............." << endl << endl;
   sleep(1);
   game_machine = new Machine();
-  cout << "Level 1 monster created!" << endl;
-  cout << "Begin tutorial" << endl;
+  cout << "   Level 1 monster created!" << endl << endl;
+  cout << "   Begin tutorial" << endl << endl;
 }
 
 // Go_battle is the function used when the user started the battle with Machine
@@ -85,9 +85,9 @@ void abyssGame::go_battle() {
   // prompt to choose a type they will use in the battle The program use
   // execptional handling to ensure that the player enter the name of the
   // monster type correctly ERROR: space in name
-  cout << "The machine monster type is: " << Machine::monster_type
-       << ". Health: " << game_machine->get_monster()->get_health() << endl;
-  cout << "Choose your monster type wisely! Enter the name of the monster: ";
+  cout << "   The machine monster type is: " << Machine::monster_type
+       << ". Health: " << game_machine->get_monster()->get_health() << endl << endl;
+  cout << "   Choose your monster type wisely! Enter the name of the monster: "<< endl;
   string player_monster_type;
   while (true) {
     cin >> player_monster_type;
@@ -98,21 +98,21 @@ void abyssGame::go_battle() {
       break;
     }
   }
-  cout << "ALL SET. GAME START IN ........ " << endl;
+  cout << "   ALL SET. GAME START IN ........ " << endl << endl;
   sleep(1);
-  cout << "3" << endl;
+  cout << "   3" << endl << endl;
   sleep(1);
-  cout << "2" << endl;
+  cout << "   2" << endl << endl;
   sleep(1);
-  cout << "1" << endl;
+  cout << "   1" << endl << endl;
   sleep(1);
 
   // Battle loop: The player goes first each battle
   while (true) {
-    cout << "Player turn. Choose your attack type: " << endl;
+    cout << "   Player turn. Choose your attack type: " << endl;
     sleep(1);
-    cout << "1. Normal attack" << endl;
-    cout << "2. Critical attack" << endl;
+    cout << "   1. Normal attack" << endl;
+    cout << "   2. Critical attack" << endl;
     if (game_player->get_player_level() >= 5) {
       cout << "3. "
            << game_player
@@ -130,14 +130,14 @@ void abyssGame::go_battle() {
       try {
         attack_type = stoi(holder_attack_type);
       } catch (std::invalid_argument const& e) {
-        cout << "Please enter a valid integer" << endl;
+        cout << "   Please enter a valid integer" << endl << endl;
         continue;
       }
       if (attack_type != 1 && attack_type != 2 && attack_type != 3) {
         if (game_player->get_player_level() < 5) {
-          cout << "Please enter number 1 or 2." << endl;
+          cout << "   Please enter number 1 or 2." << endl << endl;
         } else if (game_player->get_player_level() >= 5) {
-          cout << "Please enter number 1, 2 or 3." << endl;
+          cout << "   Please enter number 1, 2 or 3." << endl << endl;
         }
         cin.clear();
         cin.ignore();
@@ -160,13 +160,13 @@ void abyssGame::go_battle() {
     int strength = game_player->attack(game_machine, attack_type);
     if (attack_type == 1) {
       game_player->display_attack(strength);
-      cout << "Machine remained health: "
-           << game_machine->get_monster()->get_health() << endl;
+      cout << "   Machine remained health: "
+           << game_machine->get_monster()->get_health() << endl << endl;
     } else if (attack_type == 2) {
       game_player->display_attack(strength);
-      cout << "Machine remained health: "
-           << game_machine->get_monster()->get_health() << "." << endl;
-      cout << "You lose: "
+      cout << "   Machine remained health: "
+           << game_machine->get_monster()->get_health() << "." << endl << endl;
+      cout << "   You lose: "
            << round(
                   ((0.015 * game_player->get_player_level()) *
                    game_player
@@ -176,18 +176,18 @@ void abyssGame::go_battle() {
            << game_player
                   ->get_monster_list()[game_player->get_current_monster()]
                   ->get_health()
-           << endl;
+           << endl << endl;
     } else if (attack_type == 3) {
       game_player->display_attack(strength);
-      cout << "Machine remained health: "
-           << game_machine->get_monster()->get_health() << endl;
+      cout << "   Machine remained health: "
+           << game_machine->get_monster()->get_health() << endl << endl;
     }
 
     // Check if player win the game
     if (game_machine->get_monster()->get_health() <= 0) {
-      cout << "Machine lost" << endl;
-      cout << "Your reward: " << game_player->reward(true) << endl;
-      cout << "Your current coins: " << game_player->get_coins() << endl;
+      cout << "   Machine lost" << endl << endl;
+      cout << "   Your reward: " << game_player->reward(true) << endl << endl;
+      cout << "   our current coins: " << game_player->get_coins() << endl << endl;
       // game_player->get_monster_list()[game_player->get_current_monster()]
       //     ->reset();
       game_player->reset();
@@ -195,7 +195,7 @@ void abyssGame::go_battle() {
       // User can continue to play and level up their player however, the
       // machine level will remain at level 10
       if (game_machine->game_level == 10) {
-        cout << "Game over! Player wins" << endl;
+        cout << "   Game over! Player wins" << endl << endl;
       } else if (game_machine->game_level < 10) {
         game_machine->game_level++;
       }
@@ -212,16 +212,16 @@ void abyssGame::go_battle() {
     }
 
     sleep(1);
-    cout << "Machine turn" << endl;
+    cout << "   Machine turn" << endl << endl;
     sleep(1);
 
     // Display in terminal the damage the player took and their remained health
     game_player->take_attack(game_machine->get_strength());
     game_machine->display_attack();
-    cout << "Your remained health: "
+    cout << "   Your remained health: "
          << game_player->get_monster_list()[game_player->get_current_monster()]
                 ->get_health()
-         << endl;
+         << endl << endl;
 
     sleep(4);
 
@@ -237,9 +237,9 @@ void abyssGame::go_battle() {
     // Check if player lose the game
     if (game_player->get_monster_list()[game_player->get_current_monster()]
             ->get_health() <= 0) {
-      cout << "Player lost" << endl;
-      cout << "Your reward: " << game_player->reward(false) << endl;
-      cout << "Your current coins: " << game_player->get_coins() << endl;
+      cout << "   Player lost" << endl << endl;
+      cout << "   Your reward: " << game_player->reward(false) << endl << endl;
+      cout << "   Your current coins: " << game_player->get_coins() << endl << endl;
       // game_player->get_monster_list()[game_player->get_current_monster()]
       //     ->reset();
       game_player->reset();
@@ -271,22 +271,22 @@ void abyssGame::level_up() {
     game_player->get_monster_list()[i]->reset();
   }
   // Rewrite this to make it shorter - using for loop
-  cout << "LEVEL UP PAGE:" << endl;
-  cout << "Your current stats: " << endl;
+  cout << "   LEVEL UP PAGE:" << endl << endl;
+  cout << "   Your current stats: " << endl<< endl;
   for (int i = 0; i < 4; i++) {
     cout << game_player->get_monster_list()[i]->get_monster_name()
          << " - Health: " << game_player->get_monster_list()[i]->get_health()
          << " - Strength: "
          << game_player->get_monster_list()[i]->get_strength()
          << " - Critical attack: "
-         << game_player->get_monster_list()[i]->get_critical_attack() << endl;
+         << game_player->get_monster_list()[i]->get_critical_attack() << endl << endl;
   }
-  cout << "Your coins: " << game_player->get_coins() << endl;
+  cout << "   Your coins: " << game_player->get_coins() << endl << endl;
   int level_up_requirement = (game_player->get_player_level() + 1) * 100 - 50;
-  cout << "Level up requirement from level " << game_player->get_player_level()
+  cout << "   Level up requirement from level " << game_player->get_player_level()
        << " to " << game_player->get_player_level() + 1 << ": "
-       << level_up_requirement << endl;
-  cout << "Do you want to level up? Type Y/N" << endl;
+       << level_up_requirement << endl << endl;
+  cout << "   Do you want to level up? Type Y/N" << endl << endl;
   string answer;
 
   // Exceptional handling if user enter different format
@@ -294,12 +294,12 @@ void abyssGame::level_up() {
     cin >> answer;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     if (cin.fail() || (answer != "Y" && answer != "N")) {
-      cout << "Please choose again. Type Y/N" << endl;
+      cout << "   Please choose again. Type Y/N" << endl << endl;
     } else if (answer == "Y" || answer == "N") {
       break;
     }
   }
-  cout << "Loading......................" << endl;
+  cout << "   Loading......................" << endl << endl;
   sleep(1);
 
   // Level up system
@@ -320,7 +320,7 @@ void abyssGame::level_up() {
         game_player->get_monster_list()[2] = new SuperAqua();
         game_player->get_monster_list()[3] = new SuperSerbine();
       }
-      cout << "Level up successful! Your new stat: " << endl;
+      cout << "   Level up successful! Your new stat: " << endl << endl;
       for (int i = 0; i < 4; i++) {
         cout << game_player->get_monster_list()[i]->get_monster_name()
              << " - Health: "
@@ -331,7 +331,7 @@ void abyssGame::level_up() {
              << game_player->get_monster_list()[i]->get_critical_attack()
              << endl;
       }
-      cout << "Your remained coins: " << game_player->get_coins() << endl;
+      cout << "   Your remained coins: " << game_player->get_coins() << endl<< endl;
       sleep(5);
 #ifdef _WIN32
       // Windows
@@ -342,7 +342,7 @@ void abyssGame::level_up() {
 #endif
       system(command.c_str());
     } else if (game_player->get_coins() < level_up_requirement) {
-      cout << "Not enough coins" << endl;
+      cout << "   Not enough coins" << endl << endl;
     }
   } else if (answer == "N") {
 #ifdef _WIN32
@@ -363,7 +363,7 @@ void abyssGame::save_game() {
   string temporary;
   ifstream check("game_saved.txt");
   if (!check.is_open()) {
-    std::cout << "No saved game found." << std::endl;
+    cout << "    No saved game found." << endl << endl;
     exit(1);
   }
   while (!check.eof()) {
@@ -413,7 +413,7 @@ void abyssGame::save_game() {
     save_file << game_machine->game_level << endl;
     // Close the file
     save_file.close();
-    cout << "Game saved successfully." << endl;
+    cout << "   Game saved successfully." << endl << endl;
   } else if (total_line < 7 && same_name_checking == true) {
     ofstream save_file("game_saved.txt");
     save_file << 0 << endl;
@@ -421,7 +421,7 @@ void abyssGame::save_game() {
     save_file << coins1 << endl;
     save_file << player_level1 << endl;
     save_file << machine_level1 << endl;
-    cout << "Game saved successfully." << endl;
+    cout << "   Game saved successfully." << endl << endl;
   } else if (total_line >= 11 || same_name_checking == true) {
     ofstream save_file("game_saved.txt");
     save_file << 0 << endl;
@@ -433,7 +433,7 @@ void abyssGame::save_game() {
     save_file << coins2 << endl;
     save_file << player_level2 << endl;
     save_file << machine_level2 << endl;
-    cout << "Game saved successfully." << endl;
+    cout << "   Game saved successfully." << endl << endl;
   }
 }
 
@@ -449,7 +449,7 @@ abyssGame abyssGame::load_game() {
 
   // Check if the file is open
   if (!load_file.is_open()) {
-    cout << "No saved game found." << endl;
+    cout << "   No saved game found." << endl << endl;
     exit(1);
   }
 
@@ -472,9 +472,9 @@ abyssGame abyssGame::load_game() {
   stats2.push_back(player_level2);
   stats2.push_back(machine_level2);
   second_map[player_name2] = stats2;
-  cout << "1. " << player_name1 << endl;
-  cout << "2. " << player_name2 << endl;
-  cout << "Enter your player name: (type N to exit)" << endl;
+  cout << "   1. " << player_name1 << endl<< endl;
+  cout << "   2. " << player_name2 << endl<< endl;
+  cout << "   Enter your player name: (type N to exit)" << endl<< endl;
   string player_name;
   while (true) {
     cin >> player_name;
@@ -482,10 +482,10 @@ abyssGame abyssGame::load_game() {
     if (player_name == "N") {
       exit(0);
     } else if (player_name != player_name1 && player_name != player_name2) {
-      cout << "Please check your spelling" << endl;
-      cout << "1. " << player_name1 << endl;
-      cout << "2. " << player_name2 << endl;
-      cout << "Enter your player name: (type N to exit) " << endl;
+      cout << "   Please check your spelling" << endl<< endl;
+      cout << "   1. " << player_name1 << endl<< endl;
+      cout << "   2. " << player_name2 << endl<< endl;
+      cout << "   Enter your player name: (type N to exit) " << endl<< endl;
     } else {
       break;
     }
@@ -531,7 +531,7 @@ abyssGame abyssGame::load_game() {
   // Close the file
   load_file.close();
 
-  cout << "Game loaded successfully." << endl;
+  cout << "   Game loaded successfully." << endl<< endl;
   sleep(1);
 #ifdef _WIN32
   // Windows
