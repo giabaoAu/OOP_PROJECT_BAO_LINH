@@ -1,17 +1,18 @@
 #ifndef SUPERDRAGON_H
 #define SUPERDRAGON_H
 
-#include "Dragon.h"
 #include <string>
+
+#include "Dragon.h"
 
 using namespace std;
 
-class SuperDragon:public Dragon {
-    public:
-    //constructor
-    SuperDragon();
-    //Added type 3 attack type
-    int attack(int attack_type, string opponent_type);
-    ~SuperDragon();
+class SuperDragon : public Dragon {
+ public:
+  // constructor
+  SuperDragon();
+  // Added type 3 attack type
+  int attack(int attack_type, string opponent_type);
+  ~SuperDragon();
 };
 #endif

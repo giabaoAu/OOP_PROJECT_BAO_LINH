@@ -1,6 +1,6 @@
 #include "SuperDragon.h"
 
-SuperDragon::SuperDragon():Dragon() {
+SuperDragon::SuperDragon() : Dragon() {
   monster_name = "Super Dragon";
   skill_name = "Undying Flame";
   monster_level = 5;

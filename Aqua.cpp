@@ -1,12 +1,9 @@
 #include "Aqua.h"
 
-Aqua::Aqua() : Monster(160, 25, 40) {
-  monster_name = "Aqua";
-}
+Aqua::Aqua() : Monster(160, 25, 40) { monster_name = "Aqua"; }
 
 Aqua::Aqua(int game_level)
-    : Monster(400 + ((game_level - 1) * 200),
-              10 + ((game_level - 1) * 10)) {}
+    : Monster(400 + ((game_level - 1) * 200), 10 + ((game_level - 1) * 10)) {}
 
 void Aqua::reFill() {
   set_strength(get_strength() + 25);
@@ -28,7 +25,7 @@ void Aqua::reset_for_load(int player_level) {
   set_critical_attack(40 + ((player_level - 1) * 25));
 }
 
-int Aqua::attack(int attack_type, string opponent_type) { 
+int Aqua::attack(int attack_type, string opponent_type) {
   switch (attack_type) {
     case 1:
       if (opponent_type == "Dragon") {

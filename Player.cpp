@@ -45,9 +45,13 @@ string Player::get_player_name() { return user_name; }
 
 void Player::set_coins(int new_coins) { coins = new_coins; }
 
-void Player::set_player_name(string player_name) {this->user_name = player_level;}
+void Player::set_player_name(string player_name) {
+  this->user_name = player_level;
+}
 
-void Player::set_player_level(int player_level) {this->player_level = player_level;}
+void Player::set_player_level(int player_level) {
+  this->player_level = player_level;
+}
 
 Monster** Player::get_monster_list() { return monster_list; }
 
@@ -72,9 +76,7 @@ void Player::level_up() {
   }
 }
 
-void Player::reset() {
-  monster_list[get_current_monster()]->reset();
-}
+void Player::reset() { monster_list[get_current_monster()]->reset(); }
 
 int Player::reward(bool win) {
   if (win) {
@@ -89,7 +91,7 @@ int Player::reward(bool win) {
 }
 
 void Player::display_attack(int strength) {
-  cout << "Machine takes " << strength<<" damage"<<endl;
+  cout << "Machine takes " << strength << " damage" << endl;
 }
 
 Player::~Player() {}

@@ -1,8 +1,6 @@
 #include "Serbine.h"
 
-Serbine::Serbine() : Monster(180, 20, 35) {
-  monster_name = "Serbine";
-}
+Serbine::Serbine() : Monster(180, 20, 35) { monster_name = "Serbine"; }
 
 Serbine::Serbine(int game_level)
     : Monster(400 + ((game_level - 1) * 200), 10 + ((game_level - 1) * 10)) {}
@@ -35,7 +33,7 @@ int Serbine::attack(int attack_type, string opponent_type) {
         return strength;
       }
       break;
-    case 2:  
+    case 2:
       if (opponent_type == "Titan") {
         health = health - ((0.015 * monster_level) * health);
         return strength * 3;

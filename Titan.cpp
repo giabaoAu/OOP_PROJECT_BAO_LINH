@@ -1,12 +1,10 @@
 #include "Titan.h"
+
 #include <iostream>
-Titan::Titan() : Monster(250, 10, 25) {
-  monster_name = "Titan";
-}
+Titan::Titan() : Monster(250, 10, 25) { monster_name = "Titan"; }
 
 Titan::Titan(int game_level)
-    : Monster(400 + ((game_level - 1) * 200),
-              10 + ((game_level - 1) * 10)) {}
+    : Monster(400 + ((game_level - 1) * 200), 10 + ((game_level - 1) * 10)) {}
 
 int Titan::attack(int attack_type, string opponent_type) {
   switch (attack_type) {
@@ -20,11 +18,11 @@ int Titan::attack(int attack_type, string opponent_type) {
     case 2:
       if (opponent_type == "Aqua") {
         health = health - ((0.015 * monster_level) * health);
-        //std::cout<<"Remained health is: "<<health<<std::endl;
+        // std::cout<<"Remained health is: "<<health<<std::endl;
         return (strength * 3);
       } else {
         health = health - ((0.015 * monster_level) * health);
-        //std::cout<<"Remained health is: "<<health<<std::endl;
+        // std::cout<<"Remained health is: "<<health<<std::endl;
         return (strength * 2);
       }
       break;
